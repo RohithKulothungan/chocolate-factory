@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Lato", system-ui, sans-serif;
+  --color-cocoa-950: #1a0f0a;
+  --color-cocoa-900: #2c1810;
+  --color-cocoa-800: #3d2314;
+  --color-cocoa-700: #5c3a2a;
+  --color-cocoa-600: #7a4f38;
+  --color-cream-50: #faf7f2;
+  --color-cream-100: #f5e6d3;
+  --color-cream-200: #e8d4bc;
+  --color-gold-400: #c9a962;
+  --color-gold-500: #b8943f;
+  --color-burgundy-700: #6b2d3c;
+  --color-burgundy-800: #4a1f2a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream-50);
+  color: var(--color-cocoa-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201, 169, 98, 0.18), transparent),
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(107, 45, 60, 0.12), transparent),
+    linear-gradient(160deg, var(--color-cocoa-950) 0%, var(--color-cocoa-900) 45%, var(--color-cocoa-800) 100%);
+}
+
+.chocolate-shimmer {
+  background: linear-gradient(
+    110deg,
+    var(--color-cocoa-800) 0%,
+    var(--color-cocoa-600) 25%,
+    var(--color-gold-400) 50%,
+    var(--color-cocoa-600) 75%,
+    var(--color-cocoa-800) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.float-animation {
+  animation: float 5s ease-in-out infinite;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.06);
+}
+
+.product-image {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
