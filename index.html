@@ -1,23 +1,1235 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="The Chocolate Factory — artisan Belgian chocolates crafted in small batches. Discover truffles, bars, and gift collections made with single-origin cacao."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <title>The Chocolate Factory | Artisan Belgian Chocolates</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Frost Bomb — artisan chocolate bombs with surprise centres. Marshmallow, nuts, fruit & more hidden inside a glossy chocolate shell.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Frost Bomb · Artisan Chocolate Stall</title>
+<style>
+:root {
+  color-scheme: light;
+  --background: #f4efe6;
+  --foreground: #2a1810;
+  --card: rgba(255 255 255 / 0.55);
+  --card-foreground: var(--foreground);
+  --popover: #fff;
+  --popover-foreground: var(--foreground);
+  --primary: #e8672a;
+  --primary-foreground: #fff;
+  --secondary: rgba(255 255 255 / 0.92);
+  --secondary-foreground: var(--foreground);
+  --muted: rgba(42 24 16 / 0.08);
+  --muted-foreground: rgba(42 24 16 / 0.58);
+  --accent: rgba(232 103 42 / 0.12);
+  --accent-foreground: var(--primary);
+  --destructive: #c44a1a;
+  --border: rgba(42 24 16 / 0.1);
+  --input: rgba(42 24 16 / 0.12);
+  --ring: #e8672a;
+  --font-size-base: 15px;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --font-size-normal: max(12px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: clamp(2.8rem, 6vw, 4.2rem);
+  --font-size-h2: clamp(2rem, 4vw, 2.8rem);
+  --font-size-h3: calc(var(--font-size-normal) * 1.28);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --line-height-normal: 1.55;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 14px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px rgba(0 0 0 / 0.06);
+  --viz-series-1: #e8672a;
+  --viz-series-2: #f59a56;
+  --viz-series-3: #5dc977;
+  --viz-series-4: #c44a6a;
+  --viz-series-5: #9b79ec;
+  --viz-series-6: #3d2314;
+  --fb-orange: var(--primary);
+  --fb-cream: var(--background);
+  --fb-chocolate: #3d2314;
+  --fb-milk: #8b5a3c;
+  --fb-dark: #1f1209;
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at var(--cursor-x) var(--cursor-y), rgba(232 103 42 / 0.09), transparent 28%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+a {
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3, p { margin: 0; }
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+}
+
+.btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.4rem;
+  padding: 0 1rem;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-full);
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  font: inherit;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--foreground) 5%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 0.6rem 1.4rem rgba(232 103 42 / 0.28);
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--primary) 88%, #000);
+}
+
+.btn-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted-foreground);
+}
+
+.btn-ghost:hover { color: var(--foreground); }
+
+.btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.card {
+  padding: 1.1rem;
+  border-radius: var(--radius-2xl);
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Layout ── */
+#frost-bomb {
+  position: relative;
+  overflow: hidden;
+}
+
+.fb-wrap {
+  width: min(100%, 1140px);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+/* ── Decorative outline words ── */
+.fb-deco {
+  position: fixed;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 0.85;
+  letter-spacing: 0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(232 103 42 / 0.22);
+  pointer-events: none;
+  user-select: none;
+  animation: fb-deco-float 9s ease-in-out infinite alternate;
+}
+
+.fb-deco-tasty {
+  left: -0.2rem;
+  top: 18%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  animation-delay: -2s;
+}
+
+.fb-deco-gifting {
+  top: 2.5rem;
+  right: 4%;
+  opacity: 0.7;
+}
+
+.fb-deco-love {
+  bottom: 8%;
+  right: 6%;
+  opacity: 0.55;
+  animation-delay: -5s;
+}
+
+/* ── Floating chocolate shards ── */
+.fb-shards {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fb-shard {
+  position: absolute;
+  border-radius: 30% 70% 55% 45% / 55% 35% 65% 45%;
+  background: linear-gradient(145deg, #5c3a2a, #2a1810 55%, #1a0f0a);
+  box-shadow: 0 1rem 2rem rgba(0 0 0 / 0.18);
+  opacity: 0.55;
+  animation: fb-shard-drift var(--dur, 18s) ease-in-out infinite alternate;
+}
+
+.fb-shard:nth-child(1) { width: 4.5rem; height: 2.2rem; top: 8%; left: 6%; --dur: 14s; }
+.fb-shard:nth-child(2) { width: 3rem; height: 3rem; top: 72%; left: 3%; --dur: 20s; border-radius: 50%; }
+.fb-shard:nth-child(3) { width: 5rem; height: 2.5rem; top: 14%; right: 5%; --dur: 16s; }
+.fb-shard:nth-child(4) { width: 2.8rem; height: 2.8rem; bottom: 18%; right: 8%; --dur: 22s; border-radius: 50%; }
+.fb-shard:nth-child(5) { width: 3.5rem; height: 1.8rem; bottom: 6%; left: 42%; --dur: 19s; }
+
+/* ── Nav ── */
+.fb-nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem clamp(1rem, 3vw, 2rem);
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.fb-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.12em;
+}
+
+.fb-brand-dot {
+  width: 2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, #8b5a3c, var(--fb-dark) 68%);
+  box-shadow: inset -0.35rem -0.4rem 0.8rem rgba(0 0 0 / 0.35);
+  animation: fb-breathe 3.2s ease-in-out infinite;
+}
+
+.fb-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ── Hero ── */
+.fb-hero {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) 2rem;
+  isolation: isolate;
+}
+
+.fb-hero::before,
+.fb-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(64px);
+  opacity: 0.22;
+  animation: fb-drift 8s ease-in-out infinite alternate;
+}
+
+.fb-hero::before {
+  width: 18rem;
+  height: 18rem;
+  background: var(--viz-series-1);
+  inset: 0 auto auto -5rem;
+}
+
+.fb-hero::after {
+  width: 22rem;
+  height: 22rem;
+  background: var(--viz-series-3);
+  inset: auto -7rem -5rem auto;
+  animation-delay: -3s;
+}
+
+.fb-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.95fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.fb-kicker {
+  color: var(--primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.fb-title {
+  margin-block: 0.6rem 0.9rem;
+  max-width: 11ch;
+  color: var(--foreground);
+}
+
+.fb-title span { color: var(--primary); }
+
+.fb-copy {
+  max-width: 36rem;
+  color: var(--muted-foreground);
+}
+
+.fb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.35rem;
+}
+
+/* ── Interactive bomb stage ── */
+.fb-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 28rem;
+  perspective: 900px;
+  touch-action: manipulation;
+}
+
+.fb-halo {
+  position: absolute;
+  width: 88%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--fb-center, var(--primary)), transparent 74%), transparent 66%);
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+  transition: transform 0.28s ease, background 0.5s ease;
+  animation: fb-halo 3s ease-in-out infinite;
+}
+
+.fb-orbit {
+  position: absolute;
+  width: 88%;
+  aspect-ratio: 1;
+  border: 1px dashed color-mix(in srgb, var(--border), transparent 20%);
+  border-radius: 50%;
+  animation: fb-spin 22s linear infinite;
+}
+
+.fb-orbit span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--background);
+  border: 1px solid var(--border);
+  font-size: 1.1rem;
+  animation: fb-counter-spin 22s linear infinite;
+}
+
+.fb-orbit span:nth-child(1) { left: calc(50% - 1.3rem); top: -1.3rem; }
+.fb-orbit span:nth-child(2) { right: -1.3rem; bottom: 22%; }
+.fb-orbit span:nth-child(3) { left: 3%; bottom: 7%; }
+
+.fb-bomb-button {
+  appearance: none;
+  position: relative;
+  z-index: 2;
+  width: min(68vw, 18rem);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate3d(var(--px, 0), var(--py, 0), 0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.fb-shell-half {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: drop-shadow(0 1.5rem 1.4rem rgba(0 0 0 / 0.22));
+  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.75s ease;
+}
+
+.fb-shell-half::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 24%, #8b5a3c, var(--fb-dark) 68%);
+  box-shadow:
+    inset -1.8rem -2rem 2.8rem rgba(0 0 0 / 0.45),
+    inset 0.8rem 0.7rem 1.3rem rgba(255 255 255 / 0.08);
+}
+
+.fb-shell-left { clip-path: polygon(0 0, 53% 0, 47% 18%, 57% 34%, 45% 51%, 54% 69%, 43% 100%, 0 100%); }
+.fb-shell-right { clip-path: polygon(53% 0, 100% 0, 100% 100%, 43% 100%, 54% 69%, 45% 51%, 57% 34%, 47% 18%); }
+
+.fb-filling {
+  position: absolute;
+  inset: 28%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 22%), var(--fb-center, var(--primary)) 70%);
+  box-shadow: 0 0 2rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 40%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, background 0.5s ease;
+}
+
+.fb-crack-label {
+  position: absolute;
+  inset: 36%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--background), transparent 18%);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fb-bomb-button:hover .fb-shell-half {
+  filter: drop-shadow(0 1.8rem 1.8rem rgba(0 0 0 / 0.28));
+}
+
+.fb-bomb-button.is-cracked .fb-shell-left { transform: translateX(-31%) rotate(-14deg); }
+.fb-bomb-button.is-cracked .fb-shell-right { transform: translateX(31%) rotate(14deg); }
+.fb-bomb-button.is-cracked .fb-filling { transform: scale(1.25); opacity: 1; }
+.fb-bomb-button.is-cracked .fb-crack-label { opacity: 0; transform: scale(0.5); }
+
+.fb-particle {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+}
+
+.fb-stage.is-bursting .fb-particle {
+  animation: fb-pop 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) both;
+}
+
+.fb-particle:nth-of-type(1) { --x: -8rem; --y: -7rem; --r: -30deg; --delay: 0.04s; }
+.fb-particle:nth-of-type(2) { --x: 9rem; --y: -5rem; --r: 40deg; --delay: 0.1s; }
+.fb-particle:nth-of-type(3) { --x: -10rem; --y: 3rem; --r: 18deg; --delay: 0.13s; }
+.fb-particle:nth-of-type(4) { --x: 8rem; --y: 7rem; --r: -45deg; --delay: 0.06s; }
+.fb-particle:nth-of-type(5) { --x: 2rem; --y: -10rem; --r: 60deg; --delay: 0.16s; }
+.fb-particle:nth-of-type(6) { --x: -3rem; --y: 10rem; --r: -60deg; --delay: 0.11s; }
+
+.fb-selected { margin-top: 1rem; min-height: 7rem; }
+.fb-selected-name { margin-bottom: 0.3rem; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.04em; }
+.fb-selected-copy { color: var(--muted-foreground); margin: 0 0 0.75rem; }
+.fb-flavour-controls { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+/* ── Marquee ── */
+.fb-marquee-wrap {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-block: 1px solid var(--border);
+  background: color-mix(in srgb, var(--primary) 6%, var(--background));
+}
+
+.fb-marquee {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  padding-block: 0.9rem;
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  animation: fb-marquee 28s linear infinite;
+}
+
+/* ── Sections ── */
+.fb-section {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(3rem, 7vw, 4.5rem);
+}
+
+.fb-section-head {
+  max-width: 40rem;
+  margin-bottom: 2.2rem;
+}
+
+.fb-section-head p { color: var(--muted-foreground); margin-top: 0.5rem; }
+
+/* ── Formula menu ── */
+.fb-formula-list {
+  display: grid;
+  gap: 0;
+}
+
+.fb-formula {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fb-formula.is-visible { opacity: 1; transform: translateY(0); }
+
+.fb-formula-index {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: color-mix(in srgb, var(--primary) 35%, transparent);
+  line-height: 1;
+}
+
+.fb-formula-equation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.75rem;
+}
+
+.fb-ingredient {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  font-size: 1.45rem;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  transform: translateY(1rem) scale(0.7);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fb-formula.is-visible .fb-ingredient {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.fb-formula.is-visible .fb-ingredient:nth-child(1) { transition-delay: 0.1s; }
+.fb-formula.is-visible .fb-ingredient:nth-child(3) { transition-delay: 0.25s; }
+.fb-formula.is-visible .fb-ingredient:nth-child(5) { transition-delay: 0.4s; }
+
+.fb-op {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--primary);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.35s ease 0.15s, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s;
+}
+
+.fb-formula.is-visible .fb-op { opacity: 1; transform: scale(1); }
+.fb-formula.is-visible .fb-op:nth-of-type(2) { transition-delay: 0.3s; }
+
+.fb-formula-name {
+  grid-column: 1 / -1;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  letter-spacing: 0.03em;
+  color: var(--primary);
+  opacity: 0;
+  transform: translateX(-0.5rem);
+  transition: opacity 0.5s ease 0.45s, transform 0.5s ease 0.45s;
+}
+
+.fb-formula.is-visible .fb-formula-name {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fb-formula-desc {
+  grid-column: 1 / -1;
+  color: var(--muted-foreground);
+  font-size: var(--font-size-small);
+  opacity: 0;
+  transition: opacity 0.5s ease 0.55s;
+}
+
+.fb-formula.is-visible .fb-formula-desc { opacity: 1; }
+
+.fb-formula-tags {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.fb-tag {
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: var(--primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+}
+
+.fb-formula:hover .fb-ingredient {
+  animation: fb-ingredient-wiggle 0.5s ease;
+}
+
+/* ── Gifting grid ── */
+.fb-gift-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.fb-gift-card {
+  padding: 1.5rem 1.2rem;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border);
+  background: var(--card);
+  text-align: center;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.fb-gift-card:hover {
+  transform: translateY(-0.4rem) rotate(-0.5deg);
+  box-shadow: 0 1rem 2rem rgba(232 103 42 / 0.12);
+}
+
+.fb-gift-emoji {
+  display: block;
+  font-size: 2.4rem;
+  margin-bottom: 0.75rem;
+  animation: fb-float 4s ease-in-out infinite;
+}
+
+.fb-gift-card:nth-child(2) .fb-gift-emoji { animation-delay: -1.2s; }
+.fb-gift-card:nth-child(3) .fb-gift-emoji { animation-delay: -2.4s; }
+
+/* ── Challenge ── */
+.fb-challenge {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.fb-challenge-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 22rem;
+}
+
+.fb-ripple {
+  position: absolute;
+  width: 8rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  animation: fb-ripple 2.8s ease-out infinite;
+}
+
+.fb-ripple:nth-child(2) { animation-delay: 0.9s; }
+.fb-ripple:nth-child(3) { animation-delay: 1.8s; }
+
+.fb-mystery {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 9rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--fb-dark);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  animation: fb-breathe 3s ease-in-out infinite;
+}
+
+.fb-steps { display: grid; gap: 0; }
+
+.fb-step {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0.8rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.fb-step-index {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.fb-step p { color: var(--muted-foreground); margin-top: 0.25rem; }
+
+/* ── Vote ── */
+.fb-vote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.fb-vote-grid .btn {
+  flex-direction: column;
+  align-items: stretch;
+  min-height: auto;
+  padding: 0.85rem;
+  text-align: left;
+  white-space: normal;
+}
+
+.fb-vote-result {
+  height: 0.45rem;
+  margin-top: 0.6rem;
+  border-radius: 999px;
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.fb-vote-result span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fb-vote-grid .btn[aria-pressed="true"] {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+/* ── Reveal ── */
+.fb-reveal {
+  opacity: 0;
+  transform: translateY(1.4rem);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fb-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ── Footer ── */
+.fb-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: var(--font-size-small);
+}
+
+/* ── Keyframes ── */
+@keyframes fb-drift { to { transform: translate(2rem, 1.2rem) scale(1.08); } }
+@keyframes fb-breathe { 50% { transform: scale(1.05); } }
+@keyframes fb-halo { 50% { transform: translate3d(var(--mx, 0), var(--my, 0), 0) scale(1.08); opacity: 0.75; } }
+@keyframes fb-spin { to { transform: rotate(360deg); } }
+@keyframes fb-counter-spin { to { transform: rotate(-360deg); } }
+@keyframes fb-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)) scale(1.4); }
+}
+@keyframes fb-marquee { to { transform: translateX(-50%); } }
+@keyframes fb-float { 50% { transform: translateY(-0.7rem) rotate(4deg); } }
+@keyframes fb-ripple { from { transform: scale(0.55); opacity: 0.8; } to { transform: scale(2.1); opacity: 0; } }
+@keyframes fb-deco-float { 50% { transform: translateY(-0.6rem); } }
+@keyframes fb-shard-drift { 50% { transform: translate(1rem, -0.8rem) rotate(6deg); } }
+@keyframes fb-ingredient-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-6deg) scale(1.08); }
+  75% { transform: rotate(6deg) scale(1.08); }
+}
+
+@media (max-width: 820px) {
+  .fb-hero-grid, .fb-challenge { grid-template-columns: 1fr; }
+  .fb-gift-grid, .fb-vote-grid { grid-template-columns: 1fr; }
+  .fb-deco-gifting, .fb-deco-love { display: none; }
+}
+
+@media (max-width: 520px) {
+  .fb-nav-links .btn:not(.btn-primary) { display: none; }
+  .fb-stage { min-height: 22rem; }
+  .fb-bomb-button { width: 15rem; }
+  .fb-formula { grid-template-columns: 1fr; }
+  .fb-formula-index { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<div id="frost-bomb">
+  <div class="fb-shards" aria-hidden="true">
+    <span class="fb-shard"></span>
+    <span class="fb-shard"></span>
+    <span class="fb-shard"></span>
+    <span class="fb-shard"></span>
+    <span class="fb-shard"></span>
+  </div>
+
+  <span class="fb-deco fb-deco-tasty" aria-hidden="true">TASTY</span>
+  <span class="fb-deco fb-deco-gifting" aria-hidden="true">GIFTING</span>
+  <span class="fb-deco fb-deco-love" aria-hidden="true">LOVE</span>
+
+  <nav class="fb-nav" aria-label="Main">
+    <div class="fb-brand">
+      <span class="fb-brand-dot" aria-hidden="true"></span>
+      FROST BOMB
+    </div>
+    <div class="fb-nav-links">
+      <a class="btn btn-ghost" href="#fb-menu">Menu</a>
+      <a class="btn btn-ghost" href="#fb-gifting">Gifting</a>
+      <a class="btn btn-primary" href="#fb-challenge">Try the challenge</a>
+    </div>
+  </nav>
+
+  <section class="fb-hero fb-wrap" aria-labelledby="fb-title">
+    <div class="fb-hero-grid">
+      <div>
+        <p class="fb-kicker">Handcrafted at the stall · Fresh daily</p>
+        <h1 class="fb-title" id="fb-title">Chocolate outside. <span>Surprise inside.</span></h1>
+        <p class="fb-copy">Glossy chocolate shells packed with marshmallows, nuts, fruit and creamy centres. Crack one open and discover your flavour plot twist.</p>
+        <div class="fb-actions">
+          <button class="btn btn-primary" id="fb-crack-cta" type="button">Crack the chocolate</button>
+          <a class="btn" href="#fb-menu">See the full menu</a>
+        </div>
+      </div>
+      <div>
+        <div class="fb-stage" id="fb-stage" aria-live="polite">
+          <div class="fb-halo" aria-hidden="true"></div>
+          <div class="fb-orbit" aria-hidden="true"><span>🍊</span><span>🥜</span><span>🍍</span></div>
+          <button class="fb-bomb-button" id="fb-bomb" type="button" aria-label="Crack open the Frost Bomb">
+            <span class="fb-filling" aria-hidden="true"></span>
+            <span class="fb-shell-half fb-shell-left" aria-hidden="true"></span>
+            <span class="fb-shell-half fb-shell-right" aria-hidden="true"></span>
+            <span class="fb-crack-label">TAP</span>
+          </button>
+          <span class="fb-particle" aria-hidden="true">✦</span>
+          <span class="fb-particle" aria-hidden="true">●</span>
+          <span class="fb-particle" aria-hidden="true">✦</span>
+          <span class="fb-particle" aria-hidden="true">●</span>
+          <span class="fb-particle" aria-hidden="true">✦</span>
+          <span class="fb-particle" aria-hidden="true">●</span>
+        </div>
+        <div class="card fb-selected">
+          <h3 class="fb-selected-name" id="fb-selected-name">Dark Chocolate Orange Frost Bomb</h3>
+          <p class="fb-selected-copy" id="fb-selected-copy">Marshmallow + dark chocolate + zesty orange — our signature crack.</p>
+          <div class="fb-flavour-controls" aria-label="Choose a flavour to reveal">
+            <button class="btn btn-primary" type="button" data-flavour="orange" aria-pressed="true">🍊 Orange</button>
+            <button class="btn" type="button" data-flavour="mixed-nuts" aria-pressed="false">🥜 Mixed Nuts</button>
+            <button class="btn" type="button" data-flavour="pineapple" aria-pressed="false">🍍 Pineapple</button>
+            <button class="btn" type="button" data-flavour="peanut-butter" aria-pressed="false">🥜 PB Mini</button>
+            <button class="btn" type="button" data-flavour="jam" aria-pressed="false">🫙 Jam Mini</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fb-marquee-wrap" aria-hidden="true">
+    <div class="fb-marquee">
+      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
+      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
+      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
+      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
+    </div>
+  </div>
+
+  <div class="fb-wrap">
+    <section class="fb-section fb-reveal" id="fb-menu" aria-labelledby="fb-menu-title">
+      <div class="fb-section-head">
+        <p class="fb-kicker">The formula</p>
+        <h2 id="fb-menu-title">What's inside the shell?</h2>
+        <p>Every Frost Bomb is built like a recipe — pick your ingredients, crack the chocolate, taste the surprise.</p>
+      </div>
+      <div class="fb-formula-list" id="fb-formula-list"></div>
+    </section>
+
+    <section class="fb-section fb-reveal" id="fb-gifting" aria-labelledby="fb-gifting-title">
+      <div class="fb-section-head">
+        <p class="fb-kicker">Perfect for gifting</p>
+        <h2 id="fb-gifting-title">Wrap up a little love</h2>
+        <p>Hand-finished boxes, mix-and-match minis, and seasonal bundles — made to share at the stall or take home.</p>
+      </div>
+      <div class="fb-gift-grid">
+        <article class="fb-gift-card">
+          <span class="fb-gift-emoji" aria-hidden="true">🎁</span>
+          <h3>Crack &amp; Share Box</h3>
+          <p>Assorted Frost Bombs in a ribbon-tied box. Ideal for office treats.</p>
+        </article>
+        <article class="fb-gift-card">
+          <span class="fb-gift-emoji" aria-hidden="true">✨</span>
+          <h3>Mini Sampler Trio</h3>
+          <p>Peanut butter, jam and milk chocolate minis — three bites, three moods.</p>
+        </article>
+        <article class="fb-gift-card">
+          <span class="fb-gift-emoji" aria-hidden="true">💝</span>
+          <h3>Build Your Own</h3>
+          <p>Pick any six from the menu. We'll pack them fresh at the stall.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="fb-section fb-challenge fb-reveal" id="fb-challenge" aria-labelledby="fb-challenge-title">
+      <div class="fb-challenge-visual" aria-hidden="true">
+        <span class="fb-ripple"></span>
+        <span class="fb-ripple"></span>
+        <span class="fb-ripple"></span>
+        <span class="fb-mystery">?</span>
+      </div>
+      <div>
+        <p class="fb-kicker">Only at the stall</p>
+        <h2 id="fb-challenge-title">The Secret Bite Challenge</h2>
+        <p class="fb-copy">Can your taste buds solve the inside story?</p>
+        <div class="fb-steps">
+          <div class="fb-step">
+            <span class="fb-step-index">01</span>
+            <div>
+              <h3>Close your eyes</h3>
+              <p>Receive a mystery tasting bite without seeing its centre.</p>
+            </div>
+          </div>
+          <div class="fb-step">
+            <span class="fb-step-index">02</span>
+            <div>
+              <h3>Guess the filling</h3>
+              <p>Orange, nuts, pineapple, peanut butter or jam — trust your first instinct.</p>
+            </div>
+          </div>
+          <div class="fb-step">
+            <span class="fb-step-index">03</span>
+            <div>
+              <h3>Join the Flavour Wall</h3>
+              <p>Cast your vote below and help crown the crowd favourite.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fb-section fb-reveal" aria-labelledby="fb-vote-title">
+      <div class="fb-section-head">
+        <p class="fb-kicker">Your pre-taste prediction</p>
+        <h2 id="fb-vote-title">Which one would you crack first?</h2>
+        <p>Choose your team. Results animate instantly and your pick stays on this device.</p>
+      </div>
+      <div class="card">
+        <div class="fb-vote-grid" role="group" aria-label="Vote for a Frost Bomb flavour">
+          <button class="btn" type="button" data-vote="orange" aria-pressed="false">
+            🍊 Orange Frost Bomb
+            <div class="fb-vote-result"><span></span></div>
+            <small data-percent>0%</small>
+          </button>
+          <button class="btn" type="button" data-vote="mixed-nuts" aria-pressed="false">
+            🥜 Mixed Nuts Frost Bomb
+            <div class="fb-vote-result"><span></span></div>
+            <small data-percent>0%</small>
+          </button>
+          <button class="btn" type="button" data-vote="pineapple" aria-pressed="false">
+            🍍 Caramelized Pineapple
+            <div class="fb-vote-result"><span></span></div>
+            <small data-percent>0%</small>
+          </button>
+        </div>
+        <p style="margin-top:1rem;color:var(--muted-foreground)" id="fb-vote-status" aria-live="polite">Pick the flavour that has your attention.</p>
+      </div>
+    </section>
+
+    <footer class="fb-footer">
+      <span>Frost Bomb · Artisan Chocolate Stall</span>
+      <span>Contains dairy &amp; nuts · Keep chilled · Best enjoyed fresh</span>
+    </footer>
+  </div>
+</div>
+
+<script>
+(() => {
+  const root = document.getElementById('frost-bomb');
+  if (!root || root.dataset.ready === 'true') return;
+  root.dataset.ready = 'true';
+
+  const MENU = [
+    {
+      id: 'orange',
+      name: 'Dark Chocolate Orange Frost Bomb',
+      desc: 'Fluffy marshmallow meets dark chocolate and bright orange — a citrus crack classic.',
+      tags: ['Dark', 'Citrus', 'Marshmallow'],
+      ingredients: ['🍡', '🍫', '🍊'],
+      color: '#f3883b',
+      particle: '🍊',
+    },
+    {
+      id: 'mixed-nuts',
+      name: 'Milk Chocolate Mixed Nuts Frost Bomb',
+      desc: 'Creamy milk chocolate shell with toasted mixed nuts and soft marshmallow inside.',
+      tags: ['Milk', 'Crunchy', 'Marshmallow'],
+      ingredients: ['🍡', '🍫', '🥜'],
+      color: '#8b5a3c',
+      particle: '🥜',
+    },
+    {
+      id: 'peanut-butter',
+      name: 'Mini Dark Chocolate Peanut Butter',
+      desc: 'A bite-sized dark chocolate shell with a rich, creamy peanut butter centre.',
+      tags: ['Mini', 'Dark', 'Creamy'],
+      ingredients: ['🍫', '🥜'],
+      color: '#c9a04a',
+      particle: '🥜',
+    },
+    {
+      id: 'milk-mini',
+      name: 'Mini Milk Chocolate Frost Bomb',
+      desc: 'Petite milk chocolate bomb with marshmallow and a nutty surprise inside.',
+      tags: ['Mini', 'Milk', 'Marshmallow'],
+      ingredients: ['🍡', '🍫', '🥜'],
+      color: '#d4a574',
+      particle: '🍡',
+    },
+    {
+      id: 'jam',
+      name: 'Mini Dark Chocolate Jam',
+      desc: 'Dark chocolate mini with a sweet strawberry jam centre — fruity and indulgent.',
+      tags: ['Mini', 'Dark', 'Fruity'],
+      ingredients: ['🍫', '🫙'],
+      color: '#c44a6a',
+      particle: '🫙',
+    },
+    {
+      id: 'pineapple',
+      name: 'Caramelized Pineapple Milk Chocolate',
+      desc: 'Golden caramelized pineapple tucked inside smooth milk chocolate.',
+      tags: ['Milk', 'Tropical', 'Caramel'],
+      ingredients: ['🍫', '🍍'],
+      color: '#5dc977',
+      particle: '🍍',
+    },
+  ];
+
+  const flavours = Object.fromEntries(MENU.map((item) => [item.id, item]));
+
+  const stage = root.querySelector('#fb-stage');
+  const bomb = root.querySelector('#fb-bomb');
+  const crackCta = root.querySelector('#fb-crack-cta');
+  const nameEl = root.querySelector('#fb-selected-name');
+  const copyEl = root.querySelector('#fb-selected-copy');
+  const flavourButtons = Array.from(root.querySelectorAll('[data-flavour]'));
+  const formulaList = root.querySelector('#fb-formula-list');
+
+  let active = 'orange';
+  let crackTimer;
+
+  MENU.forEach((item, index) => {
+    const row = document.createElement('article');
+    row.className = 'fb-formula';
+    row.style.transitionDelay = `${index * 0.08}s`;
+
+    const ingredientsHtml = item.ingredients
+      .map((emoji, i) => `${i > 0 ? '<span class="fb-op">+</span>' : ''}<span class="fb-ingredient" aria-hidden="true">${emoji}</span>`)
+      .join('');
+
+    row.innerHTML = `
+      <span class="fb-formula-index">${String(index + 1).padStart(2, '0')}</span>
+      <div class="fb-formula-equation">${ingredientsHtml}<span class="fb-op">=</span></div>
+      <h3 class="fb-formula-name">${item.name}</h3>
+      <p class="fb-formula-desc">${item.desc}</p>
+      <div class="fb-formula-tags">${item.tags.map((t) => `<span class="fb-tag">${t}</span>`).join('')}</div>
+    `;
+  formulaList.appendChild(row);
+  });
+
+  function chooseFlavour(key, shouldCrack) {
+    const flavour = flavours[key];
+    if (!flavour) return;
+    active = key;
+    root.style.setProperty('--fb-center', flavour.color);
+    nameEl.textContent = flavour.name;
+    copyEl.textContent = flavour.desc;
+    flavourButtons.forEach((button) => {
+      const selected = button.dataset.flavour === key;
+      button.setAttribute('aria-pressed', String(selected));
+      button.classList.toggle('btn-primary', selected);
+    });
+    root.querySelectorAll('.fb-particle').forEach((particle, index) => {
+      particle.textContent = index % 2 ? '✦' : flavour.particle;
+    });
+    if (shouldCrack) crack();
+  }
+
+  function crack() {
+    window.clearTimeout(crackTimer);
+    bomb.classList.remove('is-cracked');
+    stage.classList.remove('is-bursting');
+    void bomb.offsetWidth;
+    bomb.classList.add('is-cracked');
+    stage.classList.add('is-bursting');
+    crackTimer = window.setTimeout(() => {
+      bomb.classList.remove('is-cracked');
+      stage.classList.remove('is-bursting');
+    }, 1800);
+  }
+
+  bomb.addEventListener('click', crack);
+  crackCta.addEventListener('click', crack);
+  flavourButtons.forEach((button) => {
+    button.addEventListener('click', () => chooseFlavour(button.dataset.flavour, true));
+  });
+
+  stage.addEventListener('pointermove', (event) => {
+    const rect = stage.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    stage.style.setProperty('--mx', `${x * 16}px`);
+    stage.style.setProperty('--my', `${y * 16}px`);
+    bomb.style.setProperty('--px', `${x * 8}px`);
+    bomb.style.setProperty('--py', `${y * 8}px`);
+    bomb.style.setProperty('--rx', `${y * -7}deg`);
+    bomb.style.setProperty('--ry', `${x * 7}deg`);
+  });
+
+  stage.addEventListener('pointerleave', () => {
+    ['--mx', '--my', '--px', '--py', '--rx', '--ry'].forEach((prop) => {
+      stage.style.removeProperty(prop);
+      bomb.style.removeProperty(prop);
+    });
+  });
+
+  document.addEventListener('pointermove', (event) => {
+    document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
+    document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  root.querySelectorAll('.fb-reveal, .fb-formula').forEach((el) => observer.observe(el));
+
+  const voteButtons = Array.from(root.querySelectorAll('[data-vote]'));
+  let selectedVote = localStorage.getItem('fbVote');
+  const baseVotes = { orange: 22, 'mixed-nuts': 18, pineapple: 16 };
+
+  function renderVotes() {
+    const votes = { ...baseVotes };
+    if (selectedVote && votes[selectedVote] !== undefined) votes[selectedVote] += 1;
+    const total = Object.values(votes).reduce((sum, v) => sum + v, 0);
+    voteButtons.forEach((button) => {
+      const key = button.dataset.vote;
+      const percent = Math.round((votes[key] / total) * 100);
+      button.setAttribute('aria-pressed', String(key === selectedVote));
+      button.querySelector('.fb-vote-result span').style.width = `${percent}%`;
+      button.querySelector('[data-percent]').textContent = `${percent}%`;
+    });
+  }
+
+  voteButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      selectedVote = button.dataset.vote;
+      localStorage.setItem('fbVote', selectedVote);
+      renderVotes();
+      const label = flavours[selectedVote]?.name ?? selectedVote;
+      root.querySelector('#fb-vote-status').textContent = `You're on Team ${label}. Your vote is saved on this device.`;
+    });
+  });
+
+  renderVotes();
+  chooseFlavour(active, false);
+})();
+</script>
+</body>
 </html>
