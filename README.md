@@ -1,15 +1,36 @@
 # Frost Bomb
 
-A creatively animated **preview** marketing website for the **Frost Bomb** one-day chocolate stall at Posh Fair 2026 — built from a single HTML file with no backend or checkout.
+Pre-order interest site for the **Frost Bomb** one-day chocolate stall at Posh Fair 2026. Visitors log which flavours they want; orders are saved to **GitHub** so you can track demand by flavour.
 
 ## Features
 
-- Clear **preview-only** messaging — no false promises about ordering, delivery, or pre-orders
-- Interactive **crack-the-chocolate** hero to preview flavours before fair day
-- Full **formula-style menu** for all six stall products
-- **On the day** section explaining in-person-only sales
-- Playful preview poll (not a real vote or reservation)
-- Fully responsive with `prefers-reduced-motion` support
+- Pre-order form (name, contact, flavour, quantity, notes)
+- **Live flavour counts** pulled from GitHub Issues (or `data/pre-orders.json`)
+- Each submission creates a GitHub Issue labelled `pre-order` + `flavour:orange` etc.
+- Fallback: opens a pre-filled GitHub issue if no API token is configured
+- Full formula-style menu for all six products
+
+## Setup GitHub logging (recommended)
+
+1. Create a [fine-grained GitHub token](https://github.com/settings/tokens?type=beta) with:
+   - **Issues:** Read and write
+   - **Contents:** Read and write (optional — backs up to `data/pre-orders.json`)
+   - Repository access: `chocolate-factory` only
+
+2. Add the token to `public/frost-bomb-config.js`:
+   ```javascript
+   window.FROST_BOMB_CONFIG = {
+     githubToken: 'github_pat_...',
+     githubOwner: 'RohithKulothungan',
+     githubRepo: 'chocolate-factory',
+   };
+   ```
+
+3. View pre-orders:
+   - **Issues:** https://github.com/RohithKulothungan/chocolate-factory/issues?q=label%3Apre-order
+   - **JSON backup:** `data/pre-orders.json` in the repo
+
+> Without a token, the form opens a pre-filled GitHub issue in a new tab — visitors must click Submit on GitHub.
 
 ## Getting Started
 
@@ -18,7 +39,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open http://localhost:5173
 
 ## Build
 
@@ -27,9 +48,8 @@ npm run build
 npm run preview
 ```
 
-The built site is a static `index.html` — deploy the `dist/` folder to any static host.
-
 ## Tech Stack
 
 - Pure HTML, CSS, and vanilla JavaScript
+- GitHub Issues API + optional JSON file backup
 - [Vite 8](https://vite.dev/) for dev server and production build

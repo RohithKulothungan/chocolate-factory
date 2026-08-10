@@ -1,0 +1,12 @@
+{
+  "orders": [],
+  "counts": {
+    "orange": 0,
+    "mixed-nuts": 0,
+    "peanut-butter": 0,
+    "milk-mini": 0,
+    "jam": 0,
+    "pineapple": 0
+  },
+  "totalQuantity": 0
+}
