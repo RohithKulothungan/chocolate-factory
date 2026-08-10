@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta name="description" content="Frost Bomb — artisan chocolate bombs with surprise centres. Marshmallow, nuts, fruit & more hidden inside a glossy chocolate shell.">
+<meta name="description" content="Frost Bomb — preview our one-day chocolate stall at Posh Fair 2026. See the menu before you visit. Sold in person on the day only — no online orders.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<title>Frost Bomb · Artisan Chocolate Stall</title>
+<title>Frost Bomb · Coming to Posh Fair 2026</title>
 <style>
 :root {
   color-scheme: light;
@@ -250,6 +250,20 @@ h3 {
 .fb-shard:nth-child(5) { width: 3.5rem; height: 1.8rem; bottom: 6%; left: 42%; --dur: 19s; }
 
 /* ── Nav ── */
+.fb-notice {
+  position: relative;
+  z-index: 41;
+  padding: 0.65rem clamp(1rem, 3vw, 2rem);
+  background: color-mix(in srgb, var(--primary) 14%, var(--background));
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  color: var(--foreground);
+  font-size: var(--font-size-small);
+  text-align: center;
+  line-height: 1.45;
+}
+
+.fb-notice strong { color: var(--primary); font-weight: var(--font-weight-medium); }
+
 .fb-nav {
   position: sticky;
   top: 0;
@@ -862,27 +876,31 @@ h3 {
   <span class="fb-deco fb-deco-gifting" aria-hidden="true">GIFTING</span>
   <span class="fb-deco fb-deco-love" aria-hidden="true">LOVE</span>
 
+  <p class="fb-notice" role="note">
+    <strong>Preview only.</strong> Frost Bomb chocolates are sold in person at <strong>Posh Fair 2026</strong> — one day, at the stall. No online orders, pre-orders, or delivery.
+  </p>
+
   <nav class="fb-nav" aria-label="Main">
     <div class="fb-brand">
       <span class="fb-brand-dot" aria-hidden="true"></span>
       FROST BOMB
     </div>
     <div class="fb-nav-links">
-      <a class="btn btn-ghost" href="#fb-menu">Menu</a>
-      <a class="btn btn-ghost" href="#fb-gifting">Gifting</a>
-      <a class="btn btn-primary" href="#fb-challenge">Try the challenge</a>
+      <a class="btn btn-ghost" href="#fb-menu">Menu preview</a>
+      <a class="btn btn-ghost" href="#fb-stall-day">On the day</a>
+      <a class="btn btn-primary" href="#fb-event">Find us</a>
     </div>
   </nav>
 
   <section class="fb-hero fb-wrap" aria-labelledby="fb-title">
     <div class="fb-hero-grid">
       <div>
-        <p class="fb-kicker">Handcrafted at the stall · Fresh daily</p>
+        <p class="fb-kicker">Posh Fair 2026 · One-day stall only</p>
         <h1 class="fb-title" id="fb-title">Chocolate outside. <span>Surprise inside.</span></h1>
-        <p class="fb-copy">Glossy chocolate shells packed with marshmallows, nuts, fruit and creamy centres. Crack one open and discover your flavour plot twist.</p>
+        <p class="fb-copy">We're bringing glossy chocolate shells packed with marshmallows, nuts, fruit and creamy centres — sold only at our stall on fair day. Tap below to preview what's inside. You can't buy here; come find us in person.</p>
         <div class="fb-actions">
-          <button class="btn btn-primary" id="fb-crack-cta" type="button">Crack the chocolate</button>
-          <a class="btn" href="#fb-menu">See the full menu</a>
+          <button class="btn btn-primary" id="fb-crack-cta" type="button">Preview a crack</button>
+          <a class="btn" href="#fb-menu">Browse the menu</a>
         </div>
       </div>
       <div>
@@ -904,8 +922,8 @@ h3 {
         </div>
         <div class="card fb-selected">
           <h3 class="fb-selected-name" id="fb-selected-name">Dark Chocolate Orange Frost Bomb</h3>
-          <p class="fb-selected-copy" id="fb-selected-copy">Marshmallow + dark chocolate + zesty orange — our signature crack.</p>
-          <div class="fb-flavour-controls" aria-label="Choose a flavour to reveal">
+          <p class="fb-selected-copy" id="fb-selected-copy">Marshmallow + dark chocolate + zesty orange — on the menu for fair day.</p>
+          <div class="fb-flavour-controls" aria-label="Preview flavours — sold at the stall on fair day only">
             <button class="btn btn-primary" type="button" data-flavour="orange" aria-pressed="true">🍊 Orange</button>
             <button class="btn" type="button" data-flavour="mixed-nuts" aria-pressed="false">🥜 Mixed Nuts</button>
             <button class="btn" type="button" data-flavour="pineapple" aria-pressed="false">🍍 Pineapple</button>
@@ -919,44 +937,44 @@ h3 {
 
   <div class="fb-marquee-wrap" aria-hidden="true">
     <div class="fb-marquee">
-      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
-      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
-      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
-      <span>TASTY · GIFTING · LOVE · CRACK · DISCOVER · TASTE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
     </div>
   </div>
 
   <div class="fb-wrap">
     <section class="fb-section fb-reveal" id="fb-menu" aria-labelledby="fb-menu-title">
       <div class="fb-section-head">
-        <p class="fb-kicker">The formula</p>
+        <p class="fb-kicker">Menu preview</p>
         <h2 id="fb-menu-title">What's inside the shell?</h2>
-        <p>Every Frost Bomb is built like a recipe — pick your ingredients, crack the chocolate, taste the surprise.</p>
+        <p>Here's what we're making for fair day. Every Frost Bomb is built like a recipe — you'll choose and buy in person at the stall.</p>
       </div>
       <div class="fb-formula-list" id="fb-formula-list"></div>
     </section>
 
-    <section class="fb-section fb-reveal" id="fb-gifting" aria-labelledby="fb-gifting-title">
+    <section class="fb-section fb-reveal" id="fb-stall-day" aria-labelledby="fb-stall-day-title">
       <div class="fb-section-head">
-        <p class="fb-kicker">Perfect for gifting</p>
-        <h2 id="fb-gifting-title">Wrap up a little love</h2>
-        <p>Hand-finished boxes, mix-and-match minis, and seasonal bundles — made to share at the stall or take home.</p>
+        <p class="fb-kicker">On the day only</p>
+        <h2 id="fb-stall-day-title">What to expect at the stall</h2>
+        <p>Everything below is available in person at Posh Fair 2026 — while stocks last. We can't reserve or ship; just turn up and say hello.</p>
       </div>
       <div class="fb-gift-grid">
         <article class="fb-gift-card">
+          <span class="fb-gift-emoji" aria-hidden="true">🍫</span>
+          <h3>Pick from the menu</h3>
+          <p>All six flavours above, sold individually at the stall on fair day.</p>
+        </article>
+        <article class="fb-gift-card">
           <span class="fb-gift-emoji" aria-hidden="true">🎁</span>
-          <h3>Crack &amp; Share Box</h3>
-          <p>Assorted Frost Bombs in a ribbon-tied box. Ideal for office treats.</p>
+          <h3>Gift-friendly picks</h3>
+          <p>Minis and mix-and-match options — great to share, if we still have them when you arrive.</p>
         </article>
         <article class="fb-gift-card">
           <span class="fb-gift-emoji" aria-hidden="true">✨</span>
-          <h3>Mini Sampler Trio</h3>
-          <p>Peanut butter, jam and milk chocolate minis — three bites, three moods.</p>
-        </article>
-        <article class="fb-gift-card">
-          <span class="fb-gift-emoji" aria-hidden="true">💝</span>
-          <h3>Build Your Own</h3>
-          <p>Pick any six from the menu. We'll pack them fresh at the stall.</p>
+          <h3>First come, first served</h3>
+          <p>Limited batches for one day. No pre-orders through this site.</p>
         </article>
       </div>
     </section>
@@ -969,15 +987,15 @@ h3 {
         <span class="fb-mystery">?</span>
       </div>
       <div>
-        <p class="fb-kicker">Only at the stall</p>
+        <p class="fb-kicker">At the stall on fair day</p>
         <h2 id="fb-challenge-title">The Secret Bite Challenge</h2>
-        <p class="fb-copy">Can your taste buds solve the inside story?</p>
+        <p class="fb-copy">A free tasting game we'll run at the stall — not online. Can your taste buds solve the inside story?</p>
         <div class="fb-steps">
           <div class="fb-step">
             <span class="fb-step-index">01</span>
             <div>
               <h3>Close your eyes</h3>
-              <p>Receive a mystery tasting bite without seeing its centre.</p>
+              <p>At the stall, we'll hand you a mystery bite without showing the centre.</p>
             </div>
           </div>
           <div class="fb-step">
@@ -990,22 +1008,34 @@ h3 {
           <div class="fb-step">
             <span class="fb-step-index">03</span>
             <div>
-              <h3>Join the Flavour Wall</h3>
-              <p>Cast your vote below and help crown the crowd favourite.</p>
+              <h3>Pin it on the Flavour Wall</h3>
+              <p>Add your guess to our stall wall on the day. The poll below is just for fun before you visit.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="fb-section fb-reveal" aria-labelledby="fb-vote-title">
+    <section class="fb-section fb-reveal" id="fb-event" aria-labelledby="fb-event-title">
       <div class="fb-section-head">
-        <p class="fb-kicker">Your pre-taste prediction</p>
-        <h2 id="fb-vote-title">Which one would you crack first?</h2>
-        <p>Choose your team. Results animate instantly and your pick stays on this device.</p>
+        <p class="fb-kicker">See you there</p>
+        <h2 id="fb-event-title">Posh Fair 2026</h2>
+        <p>Frost Bomb is a one-day chocolate stall. Chocolates are only available to buy in person on fair day — this website is a preview, not a shop.</p>
       </div>
       <div class="card">
-        <div class="fb-vote-grid" role="group" aria-label="Vote for a Frost Bomb flavour">
+        <p style="margin:0 0 0.5rem;font-weight:var(--font-weight-medium)">Before you visit</p>
+        <p style="margin:0;color:var(--muted-foreground)">No online checkout · No delivery · No pre-orders · Cash/card at the stall only (on the day)</p>
+      </div>
+    </section>
+
+    <section class="fb-section fb-reveal" aria-labelledby="fb-vote-title">
+      <div class="fb-section-head">
+        <p class="fb-kicker">Just for fun</p>
+        <h2 id="fb-vote-title">Which one are you most excited to try?</h2>
+        <p>A playful preview poll — not a real order or reservation. Results are simulated on your device only.</p>
+      </div>
+      <div class="card">
+        <div class="fb-vote-grid" role="group" aria-label="Preview poll — pick a flavour you're excited to try on fair day">
           <button class="btn" type="button" data-vote="orange" aria-pressed="false">
             🍊 Orange Frost Bomb
             <div class="fb-vote-result"><span></span></div>
@@ -1022,13 +1052,13 @@ h3 {
             <small data-percent>0%</small>
           </button>
         </div>
-        <p style="margin-top:1rem;color:var(--muted-foreground)" id="fb-vote-status" aria-live="polite">Pick the flavour that has your attention.</p>
+        <p style="margin-top:1rem;color:var(--muted-foreground)" id="fb-vote-status" aria-live="polite">Tap a flavour you're curious about — this doesn't reserve or order anything.</p>
       </div>
     </section>
 
     <footer class="fb-footer">
-      <span>Frost Bomb · Artisan Chocolate Stall</span>
-      <span>Contains dairy &amp; nuts · Keep chilled · Best enjoyed fresh</span>
+      <span>Frost Bomb · Posh Fair 2026 · One-day stall</span>
+      <span>Preview site only · Sold in person on fair day · Contains dairy &amp; nuts</span>
     </footer>
   </div>
 </div>
@@ -1043,7 +1073,7 @@ h3 {
     {
       id: 'orange',
       name: 'Dark Chocolate Orange Frost Bomb',
-      desc: 'Fluffy marshmallow meets dark chocolate and bright orange — a citrus crack classic.',
+      desc: 'Fluffy marshmallow meets dark chocolate and bright orange — on the stall menu for fair day.',
       tags: ['Dark', 'Citrus', 'Marshmallow'],
       ingredients: ['🍡', '🍫', '🍊'],
       color: '#f3883b',
@@ -1223,7 +1253,7 @@ h3 {
       localStorage.setItem('fbVote', selectedVote);
       renderVotes();
       const label = flavours[selectedVote]?.name ?? selectedVote;
-      root.querySelector('#fb-vote-status').textContent = `You're on Team ${label}. Your vote is saved on this device.`;
+      root.querySelector('#fb-vote-status').textContent = `You're most curious about ${label}. See you at the stall on fair day — this isn't an order.`;
     });
   });
 

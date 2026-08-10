@@ -1,15 +1,14 @@
 # Frost Bomb
 
-A creatively animated, frontend-only marketing website for the **Frost Bomb** artisan chocolate stall — built from a single HTML file with no backend required.
+A creatively animated **preview** marketing website for the **Frost Bomb** one-day chocolate stall at Posh Fair 2026 — built from a single HTML file with no backend or checkout.
 
 ## Features
 
-- Interactive **crack-the-chocolate** hero with 3D tilt and burst particles
-- Full **formula-style menu** matching the stall's six products (marshmallow + chocolate + filling)
-- Scroll-triggered ingredient assembly animations
-- Decorative **TASTY · GIFTING · LOVE** brand typography
-- Floating chocolate shards, paper texture, and cursor-reactive glow
-- Gifting section, Secret Bite Challenge, and local vote tracker
+- Clear **preview-only** messaging — no false promises about ordering, delivery, or pre-orders
+- Interactive **crack-the-chocolate** hero to preview flavours before fair day
+- Full **formula-style menu** for all six stall products
+- **On the day** section explaining in-person-only sales
+- Playful preview poll (not a real vote or reservation)
 - Fully responsive with `prefers-reduced-motion` support
 
 ## Getting Started
