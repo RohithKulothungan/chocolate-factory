@@ -4,11 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node server.js",
     "build": "vite build",
-    "start": "vite preview --host 0.0.0.0 --port ${PORT:-4173}",
+    "start": "NODE_ENV=production node server.js",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "oxlint": "^1.75.0",

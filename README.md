@@ -9,7 +9,21 @@ This is **not a shop** — there is no cart, checkout, or online payment. Visito
 - Interactive **crack animation** — tap to preview what's inside each flavour
 - Formula-style **menu** for all six Frost Bomb products
 - Stall-day info, gift-friendly picks, and the Secret Bite Challenge
+- Live **interest poll** — shared counts for all six flavours (not an order)
 - Frost Bomb theme: orange/cream/chocolate palette, Bebas Neue + Outfit typography
+
+## Interest poll
+
+Visitors tap any flavour to log interest. Counts are shared live via `/api/poll`.
+
+- Storage: `data/interest-poll.json` in this repo
+- **Railway:** set `GITHUB_TOKEN` (fine-grained token with **Contents: Read and write** on this repo) so votes persist for everyone across deploys
+
+```bash
+GITHUB_OWNER=RohithKulothungan
+GITHUB_REPO=chocolate-factory
+GITHUB_TOKEN=github_pat_...
+```
 
 ## Getting Started
 
@@ -18,7 +32,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173
+Open http://localhost:4173
 
 ## Build & Deploy
 
@@ -30,4 +44,5 @@ npm start
 ## Tech Stack
 
 - Pure HTML, CSS, and vanilla JavaScript
-- [Vite 8](https://vite.dev/) for dev server and production build
+- [Express](https://expressjs.com/) API for live interest counts
+- [Vite 8](https://vite.dev/) for production build

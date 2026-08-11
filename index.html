@@ -989,42 +989,146 @@ h3 {
 .fb-step p { color: var(--muted-foreground); margin-top: 0.25rem; }
 
 /* ── Vote ── */
+.fb-vote-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.fb-vote-total {
+  font-size: 1.05rem;
+  color: var(--foreground);
+}
+
+.fb-vote-total strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--primary);
+  margin-right: 0.35rem;
+}
+
+.fb-vote-updated {
+  color: var(--muted-foreground);
+  font-size: var(--font-size-small);
+}
+
 .fb-vote-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-  gap: 0.75rem;
-  margin-top: 1rem;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
 }
 
-.fb-vote-grid .btn {
+@media (min-width: 640px) {
+  .fb-vote-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.35rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fb-vote-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.fb-vote-card {
+  appearance: none;
+  display: flex;
   flex-direction: column;
   align-items: stretch;
-  min-height: auto;
-  padding: 0.85rem;
+  gap: 0.9rem;
+  width: 100%;
+  min-height: 8.5rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(255 255 255 / 0.72);
+  color: var(--foreground);
   text-align: left;
-  white-space: normal;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.fb-vote-result {
-  height: 0.45rem;
-  margin-top: 0.6rem;
+.fb-vote-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--primary), transparent 55%);
+  box-shadow: 0 10px 24px rgba(42 24 16 / 0.08);
+}
+
+.fb-vote-card:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.fb-vote-card.is-loading {
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.fb-vote-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fb-vote-label {
+  font-weight: var(--font-weight-medium);
+  line-height: 1.45;
+  padding-right: 0.25rem;
+}
+
+.fb-vote-count {
+  flex-shrink: 0;
+  min-width: 2.75rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--primary), transparent 88%);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.fb-vote-bar {
+  height: 0.55rem;
   border-radius: 999px;
   background: var(--muted);
   overflow: hidden;
 }
 
-.fb-vote-result span {
+.fb-vote-bar span {
   display: block;
   height: 100%;
   width: 0;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary), #fff 18%));
   transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.fb-vote-grid .btn[aria-pressed="true"] {
-  border-color: var(--primary);
-  box-shadow: inset 0 0 0 1px var(--primary);
+.fb-vote-hint {
+  color: var(--muted-foreground);
+  font-size: var(--font-size-small);
 }
+
+.fb-vote-status {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.fb-vote-status.is-success { color: #2d7a46; }
+.fb-vote-status.is-error { color: var(--destructive); }
 
 /* ── Reveal ── */
 .fb-reveal {
@@ -1355,13 +1459,17 @@ h3 {
 
     <section class="fb-section fb-reveal" aria-labelledby="fb-vote-title">
       <div class="fb-section-head">
-        <p class="fb-kicker">Just for fun</p>
-        <h2 id="fb-vote-title">Which one are you most excited to try?</h2>
-        <p>A playful preview poll — not a real order or reservation. Results are simulated on your device only.</p>
+        <p class="fb-kicker">Show your interest</p>
+        <h2 id="fb-vote-title">Which flavours are you excited to try?</h2>
+        <p>Tap any chocolate to add your interest. Counts are live for everyone — this is not an order or reservation.</p>
       </div>
-      <div class="card">
-        <div class="fb-vote-grid" id="fb-vote-grid" role="group" aria-label="Preview poll — pick a flavour you're excited to try on fair day"></div>
-        <p style="margin-top:1rem;color:var(--muted-foreground)" id="fb-vote-status" aria-live="polite">Tap a flavour you're curious about — this doesn't reserve or order anything.</p>
+      <div class="card" style="padding: 1.75rem 1.5rem;">
+        <div class="fb-vote-summary">
+          <p class="fb-vote-total"><strong id="fb-vote-total">0</strong> interests logged</p>
+          <p class="fb-vote-updated" id="fb-vote-updated">Loading live results…</p>
+        </div>
+        <div class="fb-vote-grid" id="fb-vote-grid" role="group" aria-label="Live interest poll for Frost Bomb flavours"></div>
+        <p class="fb-vote-status" id="fb-vote-status" aria-live="polite">Tap a flavour you're curious about — each tap adds one to the live count.</p>
       </div>
     </section>
 
@@ -1668,48 +1776,111 @@ h3 {
   root.querySelectorAll('.fb-reveal, .fb-formula').forEach((el) => observer.observe(el));
 
   const voteGrid = root.querySelector('#fb-vote-grid');
+  const voteTotalEl = root.querySelector('#fb-vote-total');
+  const voteUpdatedEl = root.querySelector('#fb-vote-updated');
+  const voteStatusEl = root.querySelector('#fb-vote-status');
+  let pollLoading = false;
+
   MENU.forEach((item) => {
     const button = document.createElement('button');
-    button.className = 'btn';
+    button.className = 'fb-vote-card';
     button.type = 'button';
     button.dataset.vote = item.id;
-    button.setAttribute('aria-pressed', 'false');
     button.innerHTML = `
-      ${item.pollLabel}
-      <div class="fb-vote-result"><span></span></div>
-      <small data-percent>0%</small>
+      <div class="fb-vote-card-top">
+        <span class="fb-vote-label">${item.pollLabel}</span>
+        <span class="fb-vote-count" data-count>0</span>
+      </div>
+      <div class="fb-vote-bar" aria-hidden="true"><span></span></div>
+      <span class="fb-vote-hint">Tap to show interest</span>
     `;
     voteGrid.appendChild(button);
   });
 
   const voteButtons = Array.from(root.querySelectorAll('[data-vote]'));
-  let selectedVote = localStorage.getItem('fbVote');
-  const baseVotes = Object.fromEntries(MENU.map((item) => [item.id, 0]));
 
-  function renderVotes() {
-    const votes = { ...baseVotes };
-    if (selectedVote && votes[selectedVote] !== undefined) votes[selectedVote] += 1;
-    const total = Object.values(votes).reduce((sum, v) => sum + v, 0);
+  function formatUpdatedAt(value) {
+    if (!value) return 'Live results';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return 'Live results';
+    return `Updated ${date.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}`;
+  }
+
+  function renderVotes(poll) {
+    const counts = poll?.counts || {};
+    const total = Number(poll?.totalVotes) || Object.values(counts).reduce((sum, value) => sum + (Number(value) || 0), 0);
+    const leader = Math.max(1, ...MENU.map((item) => Number(counts[item.id]) || 0));
+
+    voteTotalEl.textContent = String(total);
+    voteUpdatedEl.textContent = formatUpdatedAt(poll?.updatedAt);
+
     voteButtons.forEach((button) => {
       const key = button.dataset.vote;
-      const percent = total > 0 ? Math.round((votes[key] / total) * 100) : 0;
-      button.setAttribute('aria-pressed', String(key === selectedVote));
-      button.querySelector('.fb-vote-result span').style.width = `${percent}%`;
-      button.querySelector('[data-percent]').textContent = `${percent}%`;
+      const count = Number(counts[key]) || 0;
+      const width = leader > 0 ? Math.round((count / leader) * 100) : 0;
+      button.querySelector('[data-count]').textContent = String(count);
+      button.querySelector('.fb-vote-bar span').style.width = `${width}%`;
     });
+  }
+
+  async function refreshVotes() {
+    const response = await fetch('/api/poll', { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error('Could not load poll results');
+    const poll = await response.json();
+    renderVotes(poll);
+    return poll;
+  }
+
+  async function submitVote(flavourId, button) {
+    if (pollLoading) return;
+    pollLoading = true;
+    button.classList.add('is-loading');
+    voteStatusEl.className = 'fb-vote-status';
+    voteStatusEl.textContent = 'Adding your interest…';
+
+    try {
+      const response = await fetch('/api/poll', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ flavour: flavourId }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || 'Could not save your interest');
+      renderVotes(payload);
+      const label = flavours[flavourId]?.name ?? flavourId;
+      voteStatusEl.className = 'fb-vote-status is-success';
+      voteStatusEl.textContent = `Thanks! Your interest in ${label} is counted. See you at the stall on fair day — this isn't an order.`;
+    } catch (error) {
+      voteStatusEl.className = 'fb-vote-status is-error';
+      voteStatusEl.textContent = error.message || 'Could not save your interest right now. Please try again.';
+      try {
+        await refreshVotes();
+      } catch {
+        // Keep the last rendered counts if refresh also fails.
+      }
+    } finally {
+      button.classList.remove('is-loading');
+      pollLoading = false;
+    }
   }
 
   voteButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      selectedVote = button.dataset.vote;
-      localStorage.setItem('fbVote', selectedVote);
-      renderVotes();
-      const label = flavours[selectedVote]?.name ?? selectedVote;
-      root.querySelector('#fb-vote-status').textContent = `You're most curious about ${label}. See you at the stall on fair day — this isn't an order.`;
+      submitVote(button.dataset.vote, button);
     });
   });
 
-  renderVotes();
+  refreshVotes().catch(() => {
+    voteStatusEl.className = 'fb-vote-status is-error';
+    voteStatusEl.textContent = 'Could not load live results right now. Please refresh and try again.';
+  });
+
+  setInterval(() => {
+    refreshVotes().catch(() => {});
+  }, 15000);
   chooseFlavour(active, false);
 })();
 </script>
