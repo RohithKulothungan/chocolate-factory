@@ -64,7 +64,7 @@
   --fb-heart-clip: url(#fb-heart-clip);
   --fb-heart-left-clip: url(#fb-heart-left-clip);
   --fb-heart-right-clip: url(#fb-heart-right-clip);
-  --fb-heart-aspect: 1 / 0.92;
+  --fb-heart-aspect: 1 / 1.1;
   --cursor-x: 50%;
   --cursor-y: 50%;
 }
@@ -348,6 +348,18 @@ h3 {
   gap: clamp(1.5rem, 4vw, 3rem);
 }
 
+.fb-hero-grid > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.fb-hero-grid .fb-selected {
+  width: 100%;
+  max-width: 24rem;
+}
+
 .fb-kicker {
   color: var(--primary);
   font-size: var(--font-size-small);
@@ -379,17 +391,26 @@ h3 {
 /* ── Interactive bomb stage ── */
 .fb-stage {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 28rem;
   perspective: 900px;
   touch-action: manipulation;
   overflow: visible;
 }
 
+.fb-heart-frame {
+  position: relative;
+  width: min(72vw, 14.5rem);
+  aspect-ratio: var(--fb-heart-aspect);
+  margin: 0 auto;
+}
+
 .fb-burst-layer {
   position: absolute;
-  inset: 0;
+  inset: -12%;
   pointer-events: none;
   z-index: 6;
   overflow: visible;
@@ -397,11 +418,10 @@ h3 {
 
 .fb-halo {
   position: absolute;
-  width: 78%;
-  aspect-ratio: var(--fb-heart-aspect);
+  inset: -4%;
   clip-path: var(--fb-heart-clip);
   -webkit-clip-path: var(--fb-heart-clip);
-  background: radial-gradient(ellipse at 50% 38%, color-mix(in srgb, var(--fb-center, var(--primary)), transparent 74%), transparent 66%);
+  background: radial-gradient(ellipse at 50% 34%, color-mix(in srgb, var(--fb-center, var(--primary)), transparent 74%), transparent 66%);
   transform: translate3d(var(--mx, 0), var(--my, 0), 0);
   transition: transform 0.28s ease, background 0.5s ease;
   animation: fb-halo 3s ease-in-out infinite;
@@ -409,11 +429,11 @@ h3 {
 
 .fb-orbit {
   position: absolute;
-  width: 92%;
-  aspect-ratio: 1;
+  inset: -10%;
   border: 1px dashed color-mix(in srgb, var(--border), transparent 20%);
   border-radius: 50%;
   animation: fb-spin 22s linear infinite;
+  pointer-events: none;
 }
 
 .fb-orbit span {
@@ -435,10 +455,9 @@ h3 {
 
 .fb-bomb-button {
   appearance: none;
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 3;
-  width: min(62vw, 16rem);
-  aspect-ratio: var(--fb-heart-aspect);
   padding: 0;
   border: 0;
   background: transparent;
@@ -481,7 +500,7 @@ h3 {
 
 .fb-inner-reveal {
   position: absolute;
-  inset: 16% 18% 20%;
+  inset: 10%;
   z-index: 1;
   display: grid;
   place-items: center;
@@ -502,13 +521,13 @@ h3 {
 
 .fb-flavor-core {
   position: absolute;
-  width: 48%;
+  width: 42%;
   aspect-ratio: var(--fb-heart-aspect);
   clip-path: var(--fb-heart-clip);
   -webkit-clip-path: var(--fb-heart-clip);
   display: grid;
   place-items: center;
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   background: radial-gradient(ellipse at 42% 32%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 30%), var(--fb-center, var(--primary)) 72%);
   box-shadow: 0 0 1.5rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 35%);
   opacity: 0;
@@ -548,7 +567,7 @@ h3 {
 
 .fb-melt-drip {
   position: absolute;
-  top: 58%;
+  top: 72%;
   width: 0.55rem;
   height: 0;
   border-radius: 0 0 999px 999px;
@@ -627,10 +646,10 @@ h3 {
 
 .fb-crack-line {
   position: absolute;
-  top: 14%;
+  top: 18%;
   left: calc(50% - 1.5px);
   width: 3px;
-  height: 80%;
+  height: 72%;
   background: linear-gradient(to bottom, transparent, rgba(255 255 255 / 0.35) 18%, rgba(255 255 255 / 0.5) 50%, rgba(255 255 255 / 0.35) 82%, transparent);
   border-radius: 999px;
   opacity: 0;
@@ -682,19 +701,19 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 38% 26%, #8b5a3c, var(--fb-dark) 68%);
+  background: radial-gradient(ellipse at 50% 28%, #9a6545, #8b5a3c 38%, var(--fb-dark) 78%);
   box-shadow:
-    inset -1.8rem -2rem 2.8rem rgba(0 0 0 / 0.45),
-    inset 0.8rem 0.7rem 1.3rem rgba(255 255 255 / 0.08);
+    inset -1.2rem -1.6rem 2.2rem rgba(0 0 0 / 0.42),
+    inset 0.6rem 0.5rem 1rem rgba(255 255 255 / 0.1);
 }
 
 .fb-filling {
   position: absolute;
-  inset: 18% 16% 20%;
+  inset: 12%;
   z-index: 0;
   clip-path: var(--fb-heart-clip);
   -webkit-clip-path: var(--fb-heart-clip);
-  background: radial-gradient(ellipse at 42% 32%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 22%), var(--fb-center, var(--primary)) 70%);
+  background: radial-gradient(ellipse at 50% 36%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 22%), var(--fb-center, var(--primary)) 70%);
   box-shadow: 0 0 2rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 40%);
   opacity: 0;
   transform: scale(0.5);
@@ -703,17 +722,22 @@ h3 {
 
 .fb-crack-label {
   position: absolute;
-  inset: 22% 18% 24%;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  clip-path: var(--fb-heart-clip);
-  -webkit-clip-path: var(--fb-heart-clip);
-  background: color-mix(in srgb, var(--background), transparent 18%);
-  border: 1px solid var(--border);
+  left: 50%;
+  top: 38%;
+  z-index: 4;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0.15rem 0.35rem;
+  background: none;
+  border: 0;
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  letter-spacing: 0.1em;
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  letter-spacing: 0.2em;
+  color: #fff;
+  text-shadow:
+    0 0 0.35rem rgba(42 24 16 / 0.55),
+    0 0.15rem 0.45rem rgba(0 0 0 / 0.45),
+    0 0.5rem 1rem rgba(0 0 0 / 0.35);
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
@@ -728,7 +752,10 @@ h3 {
   animation: fb-filling-pulse 1.2s ease-in-out 0.3s 2;
 }
 
-.fb-bomb-button.is-cracked .fb-crack-label { opacity: 0; transform: scale(0.5); }
+.fb-bomb-button.is-cracked .fb-crack-label {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
 
 .fb-stage.is-bursting .fb-halo {
   animation: fb-halo-burst 1s ease-out both;
@@ -739,11 +766,9 @@ h3 {
 }
 
 .fb-reveal-label {
-  position: absolute;
+  position: relative;
   z-index: 7;
-  left: 50%;
-  bottom: 0.5rem;
-  transform: translateX(-50%) translateY(1rem);
+  margin-top: 1rem;
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-full);
   background: color-mix(in srgb, var(--fb-center, var(--primary)), transparent 12%);
@@ -752,8 +777,12 @@ h3 {
   font-family: var(--font-display);
   font-size: 0.95rem;
   letter-spacing: 0.08em;
-  white-space: nowrap;
+  text-align: center;
   opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  max-width: 100%;
+  white-space: nowrap;
   pointer-events: none;
 }
 
@@ -761,7 +790,7 @@ h3 {
   animation: fb-label-rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
 }
 
-.fb-selected { margin-top: 1rem; min-height: 7rem; }
+.fb-selected { margin-top: 1.25rem; min-height: 7rem; width: 100%; }
 .fb-selected-name { margin-bottom: 0.3rem; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.04em; }
 .fb-selected-copy { color: var(--muted-foreground); margin: 0 0 0.75rem; }
 .fb-flavour-controls { display: flex; flex-wrap: wrap; gap: 0.45rem; }
@@ -1247,9 +1276,9 @@ h3 {
 }
 
 @keyframes fb-label-rise {
-  0% { opacity: 0; transform: translateX(-50%) translateY(1rem) scale(0.9); }
-  30% { opacity: 1; transform: translateX(-50%) translateY(-0.2rem) scale(1.05); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-0.6rem) scale(1); }
+  0% { opacity: 0; transform: translateY(1rem) scale(0.9); }
+  30% { opacity: 1; transform: translateY(-0.2rem) scale(1.05); }
+  100% { opacity: 0; transform: translateY(-0.6rem) scale(1); }
 }
 
 @keyframes fb-drift { to { transform: translate(2rem, 1.2rem) scale(1.08); } }
@@ -1282,7 +1311,7 @@ h3 {
 @media (max-width: 520px) {
   .fb-nav-links .btn:not(.btn-primary) { display: none; }
   .fb-stage { min-height: 22rem; }
-  .fb-bomb-button { width: 13.5rem; }
+  .fb-heart-frame { width: 12.5rem; }
   .fb-formula { grid-template-columns: 1fr; }
   .fb-formula-index { display: none; }
 }
@@ -1299,13 +1328,13 @@ h3 {
 <svg class="fb-svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
     <clipPath id="fb-heart-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.5,0.92 C0.5,0.92 0.08,0.68 0.08,0.42 C0.08,0.24 0.20,0.14 0.32,0.20 C0.38,0.10 0.62,0.10 0.68,0.20 C0.80,0.14 0.92,0.24 0.92,0.42 C0.92,0.68 0.5,0.92 Z"/>
+      <path d="M0.5,0.9 C0.5,0.9 0.05,0.62 0.05,0.36 C0.05,0.14 0.22,0.04 0.37,0.16 C0.43,0.08 0.57,0.08 0.63,0.16 C0.78,0.04 0.95,0.14 0.95,0.36 C0.95,0.62 0.5,0.9 Z"/>
     </clipPath>
     <clipPath id="fb-heart-left-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.5,0.92 C0.5,0.92 0.08,0.68 0.08,0.42 C0.08,0.24 0.20,0.14 0.32,0.20 C0.38,0.10 0.5,0.10 L0.5,0.92 Z"/>
+      <path d="M0.5,0.9 C0.5,0.9 0.05,0.62 0.05,0.36 C0.05,0.14 0.22,0.04 0.37,0.16 C0.43,0.08 0.5,0.08 L0.5,0.9 Z"/>
     </clipPath>
     <clipPath id="fb-heart-right-clip" clipPathUnits="objectBoundingBox">
-      <path d="M0.5,0.92 C0.5,0.92 0.92,0.68 0.92,0.42 C0.92,0.24 0.80,0.14 0.68,0.20 C0.62,0.10 0.5,0.10 L0.5,0.92 Z"/>
+      <path d="M0.5,0.9 C0.5,0.9 0.95,0.62 0.95,0.36 C0.95,0.14 0.78,0.04 0.63,0.16 C0.57,0.08 0.5,0.08 L0.5,0.9 Z"/>
     </clipPath>
   </defs>
 </svg>
@@ -1351,35 +1380,37 @@ h3 {
       </div>
       <div>
         <div class="fb-stage" id="fb-stage" aria-live="polite">
-          <div class="fb-halo" aria-hidden="true"></div>
-          <div class="fb-orbit" aria-hidden="true"><span>🍊</span><span>🥜</span><span>🍍</span></div>
-          <div class="fb-burst-layer" id="fb-burst-layer" aria-hidden="true"></div>
-          <button class="fb-bomb-button" id="fb-bomb" type="button" aria-label="Crack open the heart-shaped Frost Bomb">
-            <span class="fb-crack-flash" aria-hidden="true"></span>
-            <span class="fb-shockwave" aria-hidden="true"></span>
-            <span class="fb-inner-reveal" aria-hidden="true">
-              <span class="fb-marshmallow"></span>
-              <span class="fb-flavor-core" id="fb-flavor-core">🍊</span>
-            </span>
-            <span class="fb-filling" aria-hidden="true"></span>
-            <span class="fb-shell-half fb-shell-left" aria-hidden="true">
-              <span class="fb-crack-line"></span>
-              <span class="fb-shell-chunk"></span>
-              <span class="fb-shell-chunk"></span>
-            </span>
-            <span class="fb-shell-half fb-shell-right" aria-hidden="true">
-              <span class="fb-crack-line"></span>
-              <span class="fb-shell-chunk"></span>
-              <span class="fb-shell-chunk"></span>
-            </span>
-            <span class="fb-melt-wrap" aria-hidden="true">
-              <span class="fb-melt-drip"></span>
-              <span class="fb-melt-drip"></span>
-              <span class="fb-melt-drip"></span>
-              <span class="fb-melt-drip"></span>
-            </span>
-            <span class="fb-crack-label">TAP</span>
-          </button>
+          <div class="fb-heart-frame">
+            <div class="fb-halo" aria-hidden="true"></div>
+            <div class="fb-orbit" aria-hidden="true"><span>🍊</span><span>🥜</span><span>🍍</span></div>
+            <div class="fb-burst-layer" id="fb-burst-layer" aria-hidden="true"></div>
+            <button class="fb-bomb-button" id="fb-bomb" type="button" aria-label="Crack open the heart-shaped Frost Bomb">
+              <span class="fb-crack-flash" aria-hidden="true"></span>
+              <span class="fb-shockwave" aria-hidden="true"></span>
+              <span class="fb-inner-reveal" aria-hidden="true">
+                <span class="fb-marshmallow"></span>
+                <span class="fb-flavor-core" id="fb-flavor-core">🍊</span>
+              </span>
+              <span class="fb-filling" aria-hidden="true"></span>
+              <span class="fb-shell-half fb-shell-left" aria-hidden="true">
+                <span class="fb-crack-line"></span>
+                <span class="fb-shell-chunk"></span>
+                <span class="fb-shell-chunk"></span>
+              </span>
+              <span class="fb-shell-half fb-shell-right" aria-hidden="true">
+                <span class="fb-crack-line"></span>
+                <span class="fb-shell-chunk"></span>
+                <span class="fb-shell-chunk"></span>
+              </span>
+              <span class="fb-melt-wrap" aria-hidden="true">
+                <span class="fb-melt-drip"></span>
+                <span class="fb-melt-drip"></span>
+                <span class="fb-melt-drip"></span>
+                <span class="fb-melt-drip"></span>
+              </span>
+              <span class="fb-crack-label">TAP</span>
+            </button>
+          </div>
           <span class="fb-reveal-label" id="fb-reveal-label" aria-hidden="true"></span>
         </div>
         <div class="card fb-selected">
