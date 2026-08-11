@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<meta name="description" content="Frost Bomb — pre-order your favourites for Posh Fair 2026. Log your interest by flavour and we'll see you at the stall.">
+<meta name="description" content="Frost Bomb — preview our one-day chocolate stall at Posh Fair 2026. See the menu before you visit. Sold in person on the day only — no online orders.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<script src="/frost-bomb-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<title>Frost Bomb · Pre-order for Posh Fair 2026</title>
+<title>Frost Bomb · Coming to Posh Fair 2026</title>
 <style>
 :root {
   color-scheme: light;
@@ -373,188 +372,379 @@ h3 {
   margin-top: 1.35rem;
 }
 
-.form-control,
-select.form-control {
-  display: block;
-  width: 100%;
-  min-height: 2.5rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--input);
-  border-radius: var(--radius-lg);
-  background: var(--secondary);
-  color: var(--foreground);
-  font: inherit;
-}
-
-select.form-control {
-  appearance: none;
-  padding-right: 2rem;
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
-    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
-  background-position: calc(100% - 14px) 54%, calc(100% - 10px) 54%;
-  background-size: 4px 4px, 4px 4px;
-  background-repeat: no-repeat;
-}
-
-.form-control:focus-visible {
-  outline: none;
-  border-color: var(--ring);
-  box-shadow: inset 0 0 0 1px var(--ring);
-}
-
-textarea.form-control {
-  min-height: 4.5rem;
-  resize: vertical;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.35rem;
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-medium);
-}
-
-.form-field { margin-bottom: 0.85rem; }
-
-.form-hint {
-  margin-top: 0.25rem;
-  color: var(--muted-foreground);
-  font-size: var(--font-size-small);
-}
-
-.fb-preorder-form { margin-top: 1.25rem; }
-
-.fb-preorder-form h3 {
-  margin-bottom: 0.25rem;
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  letter-spacing: 0.04em;
-}
-
-.fb-preorder-status {
-  margin-top: 0.75rem;
-  color: var(--muted-foreground);
-  font-size: var(--font-size-small);
-}
-
-.fb-preorder-status.is-success { color: #2d7a46; }
-.fb-preorder-status.is-error { color: var(--destructive); }
-
-.fb-hero-visual {
+/* ── Interactive bomb stage ── */
+.fb-stage {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 24rem;
+  min-height: 28rem;
+  perspective: 900px;
+  touch-action: manipulation;
+  overflow: visible;
 }
 
-.fb-hero-sphere {
-  position: relative;
-  width: min(58vw, 14rem);
+.fb-burst-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+}
+
+.fb-halo {
+  position: absolute;
+  width: 88%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #8b5a3c, var(--fb-dark) 68%);
-  box-shadow:
-    inset -1.2rem -1.4rem 2rem rgba(0 0 0 / 0.4),
-    0 1.5rem 2.5rem rgba(0 0 0 / 0.18);
-  animation: fb-float 4.5s ease-in-out infinite;
+  background: radial-gradient(circle, color-mix(in srgb, var(--fb-center, var(--primary)), transparent 74%), transparent 66%);
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+  transition: transform 0.28s ease, background 0.5s ease;
+  animation: fb-halo 3s ease-in-out infinite;
 }
 
-.fb-hero-sphere::after {
-  content: "";
+.fb-orbit {
   position: absolute;
-  inset: 22%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 25%), var(--fb-center, var(--primary)) 70%);
-  opacity: 0.85;
-  animation: fb-filling-pulse 3s ease-in-out infinite;
-}
-
-.fb-hero-orbit {
-  position: absolute;
-  width: min(72vw, 17rem);
+  width: 88%;
   aspect-ratio: 1;
-  border: 1px dashed color-mix(in srgb, var(--primary) 35%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--border), transparent 20%);
   border-radius: 50%;
-  animation: fb-spin 24s linear infinite;
+  animation: fb-spin 22s linear infinite;
 }
 
-.fb-hero-orbit span {
+.fb-orbit span {
   position: absolute;
   display: grid;
   place-items: center;
-  width: 2.4rem;
+  width: 2.6rem;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--background);
   border: 1px solid var(--border);
-  font-size: 1rem;
-  animation: fb-counter-spin 24s linear infinite;
+  font-size: 1.1rem;
+  animation: fb-counter-spin 22s linear infinite;
 }
 
-.fb-hero-orbit span:nth-child(1) { left: calc(50% - 1.2rem); top: -1.2rem; }
-.fb-hero-orbit span:nth-child(2) { right: -1.2rem; bottom: 24%; }
-.fb-hero-orbit span:nth-child(3) { left: 4%; bottom: 8%; }
+.fb-orbit span:nth-child(1) { left: calc(50% - 1.3rem); top: -1.3rem; }
+.fb-orbit span:nth-child(2) { right: -1.3rem; bottom: 22%; }
+.fb-orbit span:nth-child(3) { left: 3%; bottom: 7%; }
 
-.fb-counts { margin-top: 1rem; }
-
-.fb-counts h3 {
-  margin-bottom: 0.15rem;
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  letter-spacing: 0.04em;
+.fb-bomb-button {
+  appearance: none;
+  position: relative;
+  z-index: 3;
+  width: min(68vw, 18rem);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate3d(var(--px, 0), var(--py, 0), 0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
-.fb-count-row {
+.fb-stage.is-shaking .fb-bomb-button {
+  animation: fb-shake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.fb-crack-flash,
+.fb-shockwave {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.fb-crack-flash {
+  z-index: 5;
+  background: radial-gradient(circle, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 40%), transparent 68%);
+}
+
+.fb-shockwave {
+  z-index: 1;
+  border: 2px solid color-mix(in srgb, var(--fb-center, var(--primary)), transparent 30%);
+}
+
+.fb-stage.is-bursting .fb-crack-flash {
+  animation: fb-flash 0.55s ease-out both;
+}
+
+.fb-stage.is-bursting .fb-shockwave {
+  animation: fb-shockwave 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.fb-inner-reveal {
+  position: absolute;
+  inset: 22%;
+  z-index: 0;
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.5rem 0.75rem;
-  align-items: center;
-  margin-top: 0.65rem;
+  place-items: center;
+  pointer-events: none;
 }
 
-.fb-count-label {
-  font-size: var(--font-size-small);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.fb-marshmallow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #fff, #f0ebe4 55%, #e8dfd6 100%);
+  box-shadow: inset 0 -0.4rem 0.8rem rgba(0 0 0 / 0.06);
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.35s ease 0.15s, transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) 0.12s;
 }
 
-.fb-count-bar {
-  grid-column: 1 / -1;
-  height: 0.42rem;
+.fb-flavor-core {
+  position: absolute;
+  width: 52%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 30%), var(--fb-center, var(--primary)) 72%);
+  box-shadow: 0 0 1.5rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 35%);
+  opacity: 0;
+  transform: scale(0) rotate(-20deg);
+  transition: opacity 0.4s ease 0.28s, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.22s;
+}
+
+.fb-ingredient-orbit {
+  position: absolute;
+  font-size: 1.55rem;
+  opacity: 0;
+  transform: translate(0, 0) scale(0.4);
+  filter: drop-shadow(0 0.35rem 0.5rem rgba(0 0 0 / 0.15));
+}
+
+.fb-bomb-button.is-cracked .fb-marshmallow {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fb-bomb-button.is-cracked .fb-flavor-core {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.fb-stage.is-bursting .fb-ingredient-orbit {
+  animation: fb-orbit-pop 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) var(--orbit-delay, 0.2s) both;
+}
+
+.fb-melt-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  overflow: visible;
+}
+
+.fb-melt-drip {
+  position: absolute;
+  top: 48%;
+  width: 0.55rem;
+  height: 0;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(to bottom, #5c3a2a, #2a1810);
+  opacity: 0;
+  transform-origin: top center;
+}
+
+.fb-stage.is-bursting .fb-melt-drip {
+  animation: fb-drip 0.85s cubic-bezier(0.4, 0, 0.2, 1) var(--drip-delay, 0.1s) both;
+}
+
+.fb-melt-drip:nth-child(1) { left: 38%; --drip-delay: 0.08s; }
+.fb-melt-drip:nth-child(2) { left: 52%; --drip-delay: 0.14s; }
+.fb-melt-drip:nth-child(3) { left: 64%; --drip-delay: 0.2s; }
+.fb-melt-drip:nth-child(4) { left: 44%; --drip-delay: 0.18s; }
+
+.fb-choc-chip,
+.fb-flavor-pop,
+.fb-sparkle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.fb-choc-chip {
+  width: var(--chip-size, 0.65rem);
+  height: calc(var(--chip-size, 0.65rem) * 0.55);
+  border-radius: 30% 70% 50% 50%;
+  background: linear-gradient(135deg, #6b4430, #2a1810);
+  box-shadow: 0 0.15rem 0.3rem rgba(0 0 0 / 0.25);
+}
+
+.fb-flavor-pop {
+  font-size: var(--pop-size, 1.4rem);
+  filter: drop-shadow(0 0.4rem 0.6rem rgba(0 0 0 / 0.18));
+}
+
+.fb-sparkle {
+  font-size: 0.85rem;
+  color: var(--fb-center, var(--primary));
+}
+
+.fb-stage.is-bursting .fb-choc-chip {
+  animation: fb-chip-fly 1.05s cubic-bezier(0.2, 0.8, 0.2, 1) var(--fly-delay, 0s) both;
+}
+
+.fb-stage.is-bursting .fb-flavor-pop {
+  animation: fb-flavor-fly 1.15s cubic-bezier(0.2, 0.8, 0.2, 1) var(--fly-delay, 0.05s) both;
+}
+
+.fb-stage.is-bursting .fb-sparkle {
+  animation: fb-sparkle-fly 0.9s ease-out var(--fly-delay, 0.1s) both;
+}
+
+.fb-shell-half {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  filter: drop-shadow(0 1.5rem 1.4rem rgba(0 0 0 / 0.22));
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.75s ease, opacity 0.6s ease;
+}
+
+.fb-crack-line {
+  position: absolute;
+  top: 12%;
+  left: 48%;
+  width: 3px;
+  height: 76%;
+  background: linear-gradient(to bottom, transparent, rgba(255 255 255 / 0.35) 20%, rgba(255 255 255 / 0.5) 50%, rgba(255 255 255 / 0.35) 80%, transparent);
   border-radius: 999px;
-  background: var(--muted);
-  overflow: hidden;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 0.2s ease, transform 0.35s ease;
 }
 
-.fb-count-bar span {
-  display: block;
-  height: 100%;
-  width: 0;
-  background: var(--primary);
-  transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+.fb-shell-chunk {
+  position: absolute;
+  width: 1.1rem;
+  height: 0.7rem;
+  border-radius: 40% 60% 45% 55%;
+  background: linear-gradient(145deg, #6b4430, #2a1810);
+  opacity: 0;
 }
 
-.fb-count-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 0.85rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
-  color: var(--muted-foreground);
-  font-size: var(--font-size-small);
+.fb-shell-left .fb-shell-chunk:nth-child(2) { top: 28%; right: 8%; }
+.fb-shell-left .fb-shell-chunk:nth-child(3) { top: 58%; right: 14%; }
+.fb-shell-right .fb-shell-chunk:nth-child(2) { top: 35%; left: 8%; }
+.fb-shell-right .fb-shell-chunk:nth-child(3) { top: 62%; left: 12%; }
+
+.fb-bomb-button.is-cracking .fb-crack-line {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
-.fb-count-link {
-  display: inline-flex;
-  margin-top: 0.65rem;
-  font-size: var(--font-size-small);
+.fb-bomb-button.is-cracked .fb-shell-left {
+  transform: translateX(-38%) translateY(8%) rotate(-22deg);
+  filter: drop-shadow(0 2rem 1.6rem rgba(0 0 0 / 0.28));
 }
 
-/* ── Interactive bomb stage (legacy removed) ── */
-.fb-stage { display: none; }
+.fb-bomb-button.is-cracked .fb-shell-right {
+  transform: translateX(38%) translateY(8%) rotate(22deg);
+  filter: drop-shadow(0 2rem 1.6rem rgba(0 0 0 / 0.28));
+}
+
+.fb-stage.is-bursting .fb-shell-chunk {
+  animation: fb-chunk-fly 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) var(--chunk-delay, 0.1s) both;
+}
+
+.fb-shell-left .fb-shell-chunk:nth-child(2) { --fly-x: -4rem; --fly-y: -3rem; --fly-r: -50deg; --chunk-delay: 0.12s; }
+.fb-shell-left .fb-shell-chunk:nth-child(3) { --fly-x: -5rem; --fly-y: 1rem; --fly-r: -30deg; --chunk-delay: 0.18s; }
+.fb-shell-right .fb-shell-chunk:nth-child(2) { --fly-x: 4rem; --fly-y: -2rem; --fly-r: 45deg; --chunk-delay: 0.14s; }
+.fb-shell-right .fb-shell-chunk:nth-child(3) { --fly-x: 5rem; --fly-y: 2rem; --fly-r: 60deg; --chunk-delay: 0.2s; }
+
+.fb-shell-half::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 24%, #8b5a3c, var(--fb-dark) 68%);
+  box-shadow:
+    inset -1.8rem -2rem 2.8rem rgba(0 0 0 / 0.45),
+    inset 0.8rem 0.7rem 1.3rem rgba(255 255 255 / 0.08);
+}
+
+.fb-shell-left { clip-path: polygon(0 0, 53% 0, 47% 18%, 57% 34%, 45% 51%, 54% 69%, 43% 100%, 0 100%); }
+.fb-shell-right { clip-path: polygon(53% 0, 100% 0, 100% 100%, 43% 100%, 54% 69%, 45% 51%, 57% 34%, 47% 18%); }
+
+.fb-filling {
+  position: absolute;
+  inset: 28%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 22%), var(--fb-center, var(--primary)) 70%);
+  box-shadow: 0 0 2rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 40%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, background 0.5s ease;
+}
+
+.fb-crack-label {
+  position: absolute;
+  inset: 36%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--background), transparent 18%);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fb-bomb-button:hover .fb-shell-half {
+  filter: drop-shadow(0 1.8rem 1.8rem rgba(0 0 0 / 0.28));
+}
+
+.fb-bomb-button.is-cracked .fb-filling {
+  transform: scale(1.35);
+  opacity: 1;
+  animation: fb-filling-pulse 1.2s ease-in-out 0.3s 2;
+}
+
+.fb-bomb-button.is-cracked .fb-crack-label { opacity: 0; transform: scale(0.5); }
+
+.fb-stage.is-bursting .fb-halo {
+  animation: fb-halo-burst 1s ease-out both;
+}
+
+.fb-stage.is-bursting .fb-orbit {
+  animation: fb-orbit-explode 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.fb-reveal-label {
+  position: absolute;
+  z-index: 7;
+  left: 50%;
+  bottom: 0.5rem;
+  transform: translateX(-50%) translateY(1rem);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--fb-center, var(--primary)), transparent 12%);
+  border: 1px solid color-mix(in srgb, var(--fb-center, var(--primary)), transparent 50%);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fb-stage.is-bursting .fb-reveal-label {
+  animation: fb-label-rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+}
+
+.fb-selected { margin-top: 1rem; min-height: 7rem; }
+.fb-selected-name { margin-bottom: 0.3rem; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.04em; }
+.fb-selected-copy { color: var(--muted-foreground); margin: 0 0 0.75rem; }
+.fb-flavour-controls { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 
 /* ── Marquee ── */
 .fb-marquee-wrap {
@@ -996,7 +1186,7 @@ textarea.form-control {
   <span class="fb-deco fb-deco-love" aria-hidden="true">LOVE</span>
 
   <p class="fb-notice" role="note">
-    <strong>Pre-order interest for Posh Fair 2026.</strong> Tell us which flavours you'd like — we'll log your request and see you at the stall on fair day. No payment on this site.
+    <strong>Preview only.</strong> Frost Bomb chocolates are sold in person at <strong>Posh Fair 2026</strong> — one day, at the stall. No online orders, pre-orders, or delivery.
   </p>
 
   <nav class="fb-nav" aria-label="Main">
@@ -1005,59 +1195,66 @@ textarea.form-control {
       FROST BOMB
     </div>
     <div class="fb-nav-links">
-      <a class="btn btn-ghost" href="#fb-preorder">Pre-order</a>
-      <a class="btn btn-ghost" href="#fb-menu">Menu</a>
-      <a class="btn btn-primary" href="#fb-event">Fair day info</a>
+      <a class="btn btn-ghost" href="#fb-menu">Menu preview</a>
+      <a class="btn btn-ghost" href="#fb-stall-day">On the day</a>
+      <a class="btn btn-primary" href="#fb-event">Find us</a>
     </div>
   </nav>
 
   <section class="fb-hero fb-wrap" aria-labelledby="fb-title">
     <div class="fb-hero-grid">
       <div>
-        <p class="fb-kicker">Posh Fair 2026 · Pre-order your favourites</p>
+        <p class="fb-kicker">Posh Fair 2026 · One-day stall only</p>
         <h1 class="fb-title" id="fb-title">Chocolate outside. <span>Surprise inside.</span></h1>
-        <p class="fb-copy">Tell us which Frost Bomb flavours you're interested in before fair day. We'll use this to plan batches — you pay in person at the stall.</p>
-        <form class="card fb-preorder-form" id="fb-preorder-form" aria-labelledby="fb-preorder-title">
-          <h3 id="fb-preorder-title">Log your interest</h3>
-          <p class="form-hint" style="margin-bottom:0.85rem">Saved to GitHub so we can track flavour demand.</p>
-          <div class="form-field">
-            <label class="form-label" for="fb-name">Name</label>
-            <input class="form-control" id="fb-name" name="name" type="text" required autocomplete="name" placeholder="Who should we look for?">
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="fb-contact">Email or phone <span class="form-hint">(optional)</span></label>
-            <input class="form-control" id="fb-contact" name="contact" type="text" autocomplete="email" placeholder="So we can reach you on fair day">
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="fb-flavour">Flavour</label>
-            <select class="form-control" id="fb-flavour" name="flavour" required></select>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="fb-quantity">Quantity</label>
-            <input class="form-control" id="fb-quantity" name="quantity" type="number" min="1" max="50" value="1" required>
-          </div>
-          <div class="form-field">
-            <label class="form-label" for="fb-notes">Notes <span class="form-hint">(optional)</span></label>
-            <textarea class="form-control" id="fb-notes" name="notes" placeholder="Allergies, gifting, preferred pickup time…"></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit" id="fb-preorder-submit">Submit pre-order interest</button>
-          <p class="fb-preorder-status" id="fb-preorder-status" aria-live="polite"></p>
-        </form>
-      </div>
-      <div id="fb-preorder">
-        <div class="fb-hero-visual" aria-hidden="true">
-          <div class="fb-hero-orbit"><span>🍊</span><span>🥜</span><span>🍍</span></div>
-          <div class="fb-hero-sphere"></div>
+        <p class="fb-copy">We're bringing glossy chocolate shells packed with marshmallows, nuts, fruit and creamy centres — sold only at our stall on fair day. Tap below to preview what's inside. You can't buy here; come find us in person.</p>
+        <div class="fb-actions">
+          <button class="btn btn-primary" id="fb-crack-cta" type="button">Preview a crack</button>
+          <a class="btn" href="#fb-menu">Browse the menu</a>
         </div>
-        <div class="card fb-counts" id="fb-counts">
-          <h3>Interest so far</h3>
-          <p class="form-hint">Live counts from logged pre-orders</p>
-          <div id="fb-count-bars"></div>
-          <div class="fb-count-meta">
-            <span id="fb-total-orders">0 requests</span>
-            <span id="fb-total-qty">0 chocolates</span>
+      </div>
+      <div>
+        <div class="fb-stage" id="fb-stage" aria-live="polite">
+          <div class="fb-halo" aria-hidden="true"></div>
+          <div class="fb-orbit" aria-hidden="true"><span>🍊</span><span>🥜</span><span>🍍</span></div>
+          <div class="fb-burst-layer" id="fb-burst-layer" aria-hidden="true"></div>
+          <button class="fb-bomb-button" id="fb-bomb" type="button" aria-label="Crack open the Frost Bomb">
+            <span class="fb-crack-flash" aria-hidden="true"></span>
+            <span class="fb-shockwave" aria-hidden="true"></span>
+            <span class="fb-inner-reveal" aria-hidden="true">
+              <span class="fb-marshmallow"></span>
+              <span class="fb-flavor-core" id="fb-flavor-core">🍊</span>
+            </span>
+            <span class="fb-filling" aria-hidden="true"></span>
+            <span class="fb-shell-half fb-shell-left" aria-hidden="true">
+              <span class="fb-crack-line"></span>
+              <span class="fb-shell-chunk"></span>
+              <span class="fb-shell-chunk"></span>
+            </span>
+            <span class="fb-shell-half fb-shell-right" aria-hidden="true">
+              <span class="fb-crack-line"></span>
+              <span class="fb-shell-chunk"></span>
+              <span class="fb-shell-chunk"></span>
+            </span>
+            <span class="fb-melt-wrap" aria-hidden="true">
+              <span class="fb-melt-drip"></span>
+              <span class="fb-melt-drip"></span>
+              <span class="fb-melt-drip"></span>
+              <span class="fb-melt-drip"></span>
+            </span>
+            <span class="fb-crack-label">TAP</span>
+          </button>
+          <span class="fb-reveal-label" id="fb-reveal-label" aria-hidden="true"></span>
+        </div>
+        <div class="card fb-selected">
+          <h3 class="fb-selected-name" id="fb-selected-name">Dark Chocolate Orange Frost Bomb</h3>
+          <p class="fb-selected-copy" id="fb-selected-copy">Marshmallow + dark chocolate + zesty orange — on the menu for fair day.</p>
+          <div class="fb-flavour-controls" aria-label="Preview flavours — sold at the stall on fair day only">
+            <button class="btn btn-primary" type="button" data-flavour="orange" aria-pressed="true">🍊 Orange</button>
+            <button class="btn" type="button" data-flavour="mixed-nuts" aria-pressed="false">🥜 Mixed Nuts</button>
+            <button class="btn" type="button" data-flavour="pineapple" aria-pressed="false">🍍 Pineapple</button>
+            <button class="btn" type="button" data-flavour="peanut-butter" aria-pressed="false">🥜 PB Mini</button>
+            <button class="btn" type="button" data-flavour="jam" aria-pressed="false">🫙 Jam Mini</button>
           </div>
-          <a class="fb-count-link" id="fb-view-orders" href="https://github.com/RohithKulothungan/chocolate-factory/issues?q=label%3Apre-order" target="_blank" rel="noopener noreferrer">View all on GitHub →</a>
         </div>
       </div>
     </div>
@@ -1065,19 +1262,19 @@ textarea.form-control {
 
   <div class="fb-marquee-wrap" aria-hidden="true">
     <div class="fb-marquee">
-      <span>PRE-ORDER · POSH FAIR 2026 · TASTY · GIFTING · LOVE ·</span>
-      <span>PRE-ORDER · POSH FAIR 2026 · TASTY · GIFTING · LOVE ·</span>
-      <span>PRE-ORDER · POSH FAIR 2026 · TASTY · GIFTING · LOVE ·</span>
-      <span>PRE-ORDER · POSH FAIR 2026 · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
+      <span>POSH FAIR 2026 · ONE DAY ONLY · TASTY · GIFTING · LOVE ·</span>
     </div>
   </div>
 
   <div class="fb-wrap">
     <section class="fb-section fb-reveal" id="fb-menu" aria-labelledby="fb-menu-title">
       <div class="fb-section-head">
-        <p class="fb-kicker">Menu</p>
+        <p class="fb-kicker">Menu preview</p>
         <h2 id="fb-menu-title">What's inside the shell?</h2>
-        <p>Every Frost Bomb is built like a recipe. Pick your flavour in the pre-order form above.</p>
+        <p>Here's what we're making for fair day. Every Frost Bomb is built like a recipe — you'll choose and buy in person at the stall.</p>
       </div>
       <div class="fb-formula-list" id="fb-formula-list"></div>
     </section>
@@ -1086,7 +1283,7 @@ textarea.form-control {
       <div class="fb-section-head">
         <p class="fb-kicker">On the day only</p>
         <h2 id="fb-stall-day-title">What to expect at the stall</h2>
-        <p>We'll bring batches based on pre-order interest. Pay in person at the stall on fair day — while stocks last.</p>
+        <p>Everything below is available in person at Posh Fair 2026 — while stocks last. We can't reserve or ship; just turn up and say hello.</p>
       </div>
       <div class="fb-gift-grid">
         <article class="fb-gift-card">
@@ -1101,8 +1298,8 @@ textarea.form-control {
         </article>
         <article class="fb-gift-card">
           <span class="fb-gift-emoji" aria-hidden="true">✨</span>
-          <h3>Pre-order to help us plan</h3>
-          <p>Log your flavour interest above so we know what to make more of.</p>
+          <h3>First come, first served</h3>
+          <p>Limited batches for one day. No pre-orders through this site.</p>
         </article>
       </div>
     </section>
@@ -1137,7 +1334,7 @@ textarea.form-control {
             <span class="fb-step-index">03</span>
             <div>
               <h3>Pin it on the Flavour Wall</h3>
-              <p>Add your guess to our stall wall on the day.</p>
+              <p>Add your guess to our stall wall on the day. The poll below is just for fun before you visit.</p>
             </div>
           </div>
         </div>
@@ -1148,17 +1345,45 @@ textarea.form-control {
       <div class="fb-section-head">
         <p class="fb-kicker">See you there</p>
         <h2 id="fb-event-title">Posh Fair 2026</h2>
-        <p>Frost Bomb is a one-day chocolate stall at Posh Fair 2026. Pre-order your interest here; pay in person on fair day.</p>
+        <p>Frost Bomb is a one-day chocolate stall. Chocolates are only available to buy in person on fair day — this website is a preview, not a shop.</p>
       </div>
       <div class="card">
-        <p style="margin:0 0 0.5rem;font-weight:var(--font-weight-medium)">How it works</p>
-        <p style="margin:0;color:var(--muted-foreground)">Submit interest on this site → we plan batches → you collect and pay at the stall on fair day. No online payment or delivery.</p>
+        <p style="margin:0 0 0.5rem;font-weight:var(--font-weight-medium)">Before you visit</p>
+        <p style="margin:0;color:var(--muted-foreground)">No online checkout · No delivery · No pre-orders · Cash/card at the stall only (on the day)</p>
+      </div>
+    </section>
+
+    <section class="fb-section fb-reveal" aria-labelledby="fb-vote-title">
+      <div class="fb-section-head">
+        <p class="fb-kicker">Just for fun</p>
+        <h2 id="fb-vote-title">Which one are you most excited to try?</h2>
+        <p>A playful preview poll — not a real order or reservation. Results are simulated on your device only.</p>
+      </div>
+      <div class="card">
+        <div class="fb-vote-grid" role="group" aria-label="Preview poll — pick a flavour you're excited to try on fair day">
+          <button class="btn" type="button" data-vote="orange" aria-pressed="false">
+            🍊 Orange Frost Bomb
+            <div class="fb-vote-result"><span></span></div>
+            <small data-percent>0%</small>
+          </button>
+          <button class="btn" type="button" data-vote="mixed-nuts" aria-pressed="false">
+            🥜 Mixed Nuts Frost Bomb
+            <div class="fb-vote-result"><span></span></div>
+            <small data-percent>0%</small>
+          </button>
+          <button class="btn" type="button" data-vote="pineapple" aria-pressed="false">
+            🍍 Caramelized Pineapple
+            <div class="fb-vote-result"><span></span></div>
+            <small data-percent>0%</small>
+          </button>
+        </div>
+        <p style="margin-top:1rem;color:var(--muted-foreground)" id="fb-vote-status" aria-live="polite">Tap a flavour you're curious about — this doesn't reserve or order anything.</p>
       </div>
     </section>
 
     <footer class="fb-footer">
-      <span>Frost Bomb · Posh Fair 2026 · Pre-order interest</span>
-      <span>Pay at the stall on fair day · Contains dairy &amp; nuts</span>
+      <span>Frost Bomb · Posh Fair 2026 · One-day stall</span>
+      <span>Preview site only · Sold in person on fair day · Contains dairy &amp; nuts</span>
     </footer>
   </div>
 </div>
@@ -1232,38 +1457,43 @@ textarea.form-control {
     },
   ];
 
-  const CONFIG = window.FROST_BOMB_CONFIG || {
-    githubToken: '',
-    githubOwner: 'RohithKulothungan',
-    githubRepo: 'chocolate-factory',
-  };
+  const flavours = Object.fromEntries(MENU.map((item) => [item.id, item]));
 
-  const flavourSelect = root.querySelector('#fb-flavour');
-  const preorderForm = root.querySelector('#fb-preorder-form');
-  const preorderStatus = root.querySelector('#fb-preorder-status');
-  const countBars = root.querySelector('#fb-count-bars');
-  const totalOrdersEl = root.querySelector('#fb-total-orders');
-  const totalQtyEl = root.querySelector('#fb-total-qty');
-  const viewOrdersLink = root.querySelector('#fb-view-orders');
+  const stage = root.querySelector('#fb-stage');
+  const bomb = root.querySelector('#fb-bomb');
+  const crackCta = root.querySelector('#fb-crack-cta');
+  const nameEl = root.querySelector('#fb-selected-name');
+  const copyEl = root.querySelector('#fb-selected-copy');
+  const flavorCore = root.querySelector('#fb-flavor-core');
+  const revealLabel = root.querySelector('#fb-reveal-label');
+  const burstLayer = root.querySelector('#fb-burst-layer');
+  const innerReveal = root.querySelector('.fb-inner-reveal');
+  const orbit = root.querySelector('.fb-orbit');
+  const flavourButtons = Array.from(root.querySelectorAll('[data-flavour]'));
   const formulaList = root.querySelector('#fb-formula-list');
-  const submitBtn = root.querySelector('#fb-preorder-submit');
 
-  const FLAVOUR_LABEL_PREFIX = 'flavour:';
+  const ORBIT_ANGLES = [
+    { x: '0', y: '-5.5rem', r: '0deg' },
+    { x: '4.8rem', y: '2.5rem', r: '25deg' },
+    { x: '-4.5rem', y: '3rem', r: '-20deg' },
+    { x: '3rem', y: '-4rem', r: '15deg' },
+    { x: '-3.5rem', y: '-3.5rem', r: '-30deg' },
+  ];
 
-  MENU.forEach((item) => {
-    const option = document.createElement('option');
-    option.value = item.id;
-    option.textContent = `${item.particle} ${item.name}`;
-    flavourSelect?.appendChild(option);
-  });
+  let active = 'orange';
+  let crackTimer;
+  let crackPhaseTimer;
+  let resetTimer;
 
   MENU.forEach((item, index) => {
     const row = document.createElement('article');
     row.className = 'fb-formula';
     row.style.transitionDelay = `${index * 0.08}s`;
+
     const ingredientsHtml = item.ingredients
       .map((emoji, i) => `${i > 0 ? '<span class="fb-op">+</span>' : ''}<span class="fb-ingredient" aria-hidden="true">${emoji}</span>`)
       .join('');
+
     row.innerHTML = `
       <span class="fb-formula-index">${String(index + 1).padStart(2, '0')}</span>
       <div class="fb-formula-equation">${ingredientsHtml}<span class="fb-op">=</span></div>
@@ -1271,228 +1501,164 @@ textarea.form-control {
       <p class="fb-formula-desc">${item.desc}</p>
       <div class="fb-formula-tags">${item.tags.map((t) => `<span class="fb-tag">${t}</span>`).join('')}</div>
     `;
-    formulaList.appendChild(row);
+  formulaList.appendChild(row);
   });
 
-  function emptyCounts() {
-    return Object.fromEntries(MENU.map((item) => [item.id, { orders: 0, quantity: 0 }]));
+  function clearOrbitIngredients() {
+    innerReveal?.querySelectorAll('.fb-ingredient-orbit').forEach((el) => el.remove());
   }
 
-  function parseIssue(issue) {
-    const flavourLabel = issue.labels?.find((label) => label.name.startsWith(FLAVOUR_LABEL_PREFIX));
-    const flavourId = flavourLabel?.name.slice(FLAVOUR_LABEL_PREFIX.length);
-    const body = issue.body || '';
-    const qtyMatch = body.match(/\*\*Quantity:\*\*\s*(\d+)/i) || body.match(/quantity[:\s]+(\d+)/i);
-    const quantity = qtyMatch ? Number.parseInt(qtyMatch[1], 10) : 1;
-    return { flavourId, quantity: Number.isFinite(quantity) ? quantity : 1 };
-  }
-
-  function aggregateCounts(issues) {
-    const counts = emptyCounts();
-    let totalOrders = 0;
-    let totalQuantity = 0;
-    issues.forEach((issue) => {
-      const { flavourId, quantity } = parseIssue(issue);
-      if (!flavourId || !counts[flavourId]) return;
-      counts[flavourId].orders += 1;
-      counts[flavourId].quantity += quantity;
-      totalOrders += 1;
-      totalQuantity += quantity;
+  function buildOrbitIngredients(ingredients) {
+    clearOrbitIngredients();
+    ingredients.forEach((emoji, index) => {
+      const el = document.createElement('span');
+      el.className = 'fb-ingredient-orbit';
+      el.textContent = emoji;
+      const angle = ORBIT_ANGLES[index % ORBIT_ANGLES.length];
+      el.style.setProperty('--orbit-x', angle.x);
+      el.style.setProperty('--orbit-y', angle.y);
+      el.style.setProperty('--orbit-r', angle.r);
+      el.style.setProperty('--orbit-delay', `${0.18 + index * 0.1}s`);
+      innerReveal?.appendChild(el);
     });
-    return { counts, totalOrders, totalQuantity };
   }
 
-  function renderCounts({ counts, totalOrders, totalQuantity }) {
-    if (!countBars) return;
-    const maxQty = Math.max(1, ...MENU.map((item) => counts[item.id].quantity));
-    countBars.innerHTML = MENU.map((item) => {
-      const { orders, quantity } = counts[item.id];
-      const width = Math.round((quantity / maxQty) * 100);
-      return `
-        <div class="fb-count-row">
-          <span class="fb-count-label">${item.particle} ${item.name}</span>
-          <span class="fb-count-label">${quantity} · ${orders} req</span>
-          <div class="fb-count-bar"><span style="width:${width}%"></span></div>
-        </div>
-      `;
-    }).join('');
-    if (totalOrdersEl) totalOrdersEl.textContent = `${totalOrders} request${totalOrders === 1 ? '' : 's'}`;
-    if (totalQtyEl) totalQtyEl.textContent = `${totalQuantity} chocolate${totalQuantity === 1 ? '' : 's'}`;
-  }
+  function spawnBurst(flavour) {
+    if (!burstLayer) return;
+    burstLayer.innerHTML = '';
 
-  async function fetchCountsFromGitHub() {
-    const url = `https://api.github.com/repos/${CONFIG.githubOwner}/${CONFIG.githubRepo}/issues?labels=pre-order&state=all&per_page=100`;
-    const response = await fetch(url, {
-      headers: { Accept: 'application/vnd.github+json' },
-    });
-    if (!response.ok) throw new Error('Could not load GitHub pre-orders');
-    const issues = await response.json();
-    return aggregateCounts(Array.isArray(issues) ? issues : []);
-  }
-
-  async function fetchCountsFromJson() {
-    const url = `https://raw.githubusercontent.com/${CONFIG.githubOwner}/${CONFIG.githubRepo}/main/data/pre-orders.json`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Could not load pre-orders file');
-    const data = await response.json();
-    const counts = emptyCounts();
-    (data.orders || []).forEach((order) => {
-      if (!counts[order.flavour]) return;
-      counts[order.flavour].orders += 1;
-      counts[order.flavour].quantity += order.quantity || 1;
-    });
-    const totalOrders = data.orders?.length || 0;
-    const totalQuantity = data.totalQuantity || Object.values(counts).reduce((sum, c) => sum + c.quantity, 0);
-    return { counts, totalOrders, totalQuantity };
-  }
-
-  async function refreshCounts() {
-    try {
-      const result = await fetchCountsFromGitHub();
-      renderCounts(result);
-      return;
-    } catch {
-      /* try json fallback */
+    const chipCount = 14;
+    for (let i = 0; i < chipCount; i += 1) {
+      const chip = document.createElement('span');
+      chip.className = 'fb-choc-chip';
+      const angle = (Math.PI * 2 * i) / chipCount + Math.random() * 0.4;
+      const dist = 4 + Math.random() * 5;
+      chip.style.setProperty('--fly-x', `${Math.cos(angle) * dist}rem`);
+      chip.style.setProperty('--fly-y', `${Math.sin(angle) * dist}rem`);
+      chip.style.setProperty('--fly-r', `${Math.round(Math.random() * 360 - 180)}deg`);
+      chip.style.setProperty('--fly-delay', `${Math.random() * 0.12}s`);
+      chip.style.setProperty('--chip-size', `${0.45 + Math.random() * 0.5}rem`);
+      burstLayer.appendChild(chip);
     }
-    try {
-      const result = await fetchCountsFromJson();
-      renderCounts(result);
-    } catch {
-      renderCounts({ counts: emptyCounts(), totalOrders: 0, totalQuantity: 0 });
+
+    flavour.ingredients.forEach((emoji, index) => {
+      const pop = document.createElement('span');
+      pop.className = 'fb-flavor-pop';
+      pop.textContent = emoji;
+      const angle = (Math.PI * 2 * index) / flavour.ingredients.length - Math.PI / 2;
+      const dist = 5.5 + index * 0.8;
+      pop.style.setProperty('--fly-x', `${Math.cos(angle) * dist}rem`);
+      pop.style.setProperty('--fly-y', `${Math.sin(angle) * dist}rem`);
+      pop.style.setProperty('--fly-r', `${Math.round(20 + Math.random() * 40)}deg`);
+      pop.style.setProperty('--fly-delay', `${0.06 + index * 0.08}s`);
+      pop.style.setProperty('--pop-size', `${1.3 + index * 0.15}rem`);
+      burstLayer.appendChild(pop);
+    });
+
+    for (let i = 0; i < 8; i += 1) {
+      const sparkle = document.createElement('span');
+      sparkle.className = 'fb-sparkle';
+      sparkle.textContent = i % 2 ? '✦' : '●';
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 3 + Math.random() * 4;
+      sparkle.style.setProperty('--fly-x', `${Math.cos(angle) * dist}rem`);
+      sparkle.style.setProperty('--fly-y', `${Math.sin(angle) * dist}rem`);
+      sparkle.style.setProperty('--fly-delay', `${0.05 + Math.random() * 0.15}s`);
+      burstLayer.appendChild(sparkle);
     }
   }
 
-  function buildIssueBody({ name, contact, flavour, quantity, notes }) {
-    const item = MENU.find((entry) => entry.id === flavour);
-    return [
-      '### Frost Bomb pre-order interest',
-      '',
-      `**Name:** ${name}`,
-      `**Contact:** ${contact || '—'}`,
-      `**Flavour:** ${item?.name || flavour}`,
-      `**Flavour ID:** ${flavour}`,
-      `**Quantity:** ${quantity}`,
-      `**Notes:** ${notes || '—'}`,
-      `**Submitted:** ${new Date().toISOString()}`,
-      '',
-      '_Logged via frost-bomb website. Pay in person at Posh Fair 2026._',
-    ].join('\n');
-  }
-
-  function buildIssueUrl(payload) {
-    const item = MENU.find((entry) => entry.id === payload.flavour);
-    const title = encodeURIComponent(`Pre-order: ${item?.name || payload.flavour} ×${payload.quantity}`);
-    const body = encodeURIComponent(buildIssueBody(payload));
-    return `https://github.com/${CONFIG.githubOwner}/${CONFIG.githubRepo}/issues/new?template=pre-order.yml&title=${title}&body=${body}`;
-  }
-
-  async function createGitHubIssue(payload) {
-    const item = MENU.find((entry) => entry.id === payload.flavour);
-    const response = await fetch(`https://api.github.com/repos/${CONFIG.githubOwner}/${CONFIG.githubRepo}/issues`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${CONFIG.githubToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: `Pre-order: ${item?.name || payload.flavour} ×${payload.quantity}`,
-        body: buildIssueBody(payload),
-        labels: ['pre-order', `${FLAVOUR_LABEL_PREFIX}${payload.flavour}`],
-      }),
+  function updateOrbitIcons(ingredients) {
+    if (!orbit) return;
+    const icons = orbit.querySelectorAll('span');
+    ingredients.slice(0, 3).forEach((emoji, index) => {
+      if (icons[index]) icons[index].textContent = emoji;
     });
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.message || 'GitHub issue could not be created');
-    }
-    return response.json();
   }
 
-  async function appendToJsonFile(payload) {
-    const path = 'data/pre-orders.json';
-    const apiBase = `https://api.github.com/repos/${CONFIG.githubOwner}/${CONFIG.githubRepo}/contents/${path}`;
-    const getResponse = await fetch(apiBase, {
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${CONFIG.githubToken}`,
-      },
+  function chooseFlavour(key, shouldCrack) {
+    const flavour = flavours[key];
+    if (!flavour) return;
+    active = key;
+    root.style.setProperty('--fb-center', flavour.color);
+    nameEl.textContent = flavour.name;
+    copyEl.textContent = flavour.desc;
+    if (flavorCore) flavorCore.textContent = flavour.particle;
+    const marshmallow = root.querySelector('.fb-marshmallow');
+    if (marshmallow) marshmallow.style.display = flavour.hasMarshmallow ? 'block' : 'none';
+    flavourButtons.forEach((button) => {
+      const selected = button.dataset.flavour === key;
+      button.setAttribute('aria-pressed', String(selected));
+      button.classList.toggle('btn-primary', selected);
     });
-    if (!getResponse.ok) throw new Error('Could not read pre-orders file');
-    const file = await getResponse.json();
-    const data = JSON.parse(atob(file.content.replace(/\n/g, '')));
-    const order = {
-      id: crypto.randomUUID?.() || String(Date.now()),
-      ...payload,
-      submittedAt: new Date().toISOString(),
-    };
-    data.orders = data.orders || [];
-    data.orders.push(order);
-    data.counts = data.counts || {};
-    data.counts[payload.flavour] = (data.counts[payload.flavour] || 0) + payload.quantity;
-    data.totalQuantity = (data.totalQuantity || 0) + payload.quantity;
-    const putResponse = await fetch(apiBase, {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${CONFIG.githubToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: `Add pre-order: ${payload.name} — ${payload.flavour}`,
-        content: btoa(JSON.stringify(data, null, 2)),
-        sha: file.sha,
-      }),
-    });
-    if (!putResponse.ok) throw new Error('Could not save pre-order file');
+    buildOrbitIngredients(flavour.ingredients);
+    updateOrbitIcons(flavour.ingredients);
+    if (shouldCrack) crack();
   }
 
-  function setStatus(message, type = '') {
-    if (!preorderStatus) return;
-    preorderStatus.textContent = message;
-    preorderStatus.className = `fb-preorder-status${type ? ` is-${type}` : ''}`;
+  function resetCrack() {
+    bomb.classList.remove('is-cracking', 'is-cracked');
+    stage.classList.remove('is-shaking', 'is-bursting');
+    if (burstLayer) burstLayer.innerHTML = '';
+    if (revealLabel) revealLabel.textContent = '';
+    clearOrbitIngredients();
   }
 
-  preorderForm?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const formData = new FormData(preorderForm);
-    const payload = {
-      name: String(formData.get('name') || '').trim(),
-      contact: String(formData.get('contact') || '').trim(),
-      flavour: String(formData.get('flavour') || ''),
-      quantity: Number.parseInt(String(formData.get('quantity') || '1'), 10) || 1,
-      notes: String(formData.get('notes') || '').trim(),
-    };
-    if (!payload.name || !payload.flavour) {
-      setStatus('Please enter your name and pick a flavour.', 'error');
-      return;
-    }
+  function crack() {
+    const flavour = flavours[active];
+    if (!flavour) return;
 
-    submitBtn.disabled = true;
-    setStatus('Saving your pre-order interest…');
+    window.clearTimeout(crackTimer);
+    window.clearTimeout(crackPhaseTimer);
+    window.clearTimeout(resetTimer);
+    resetCrack();
+    void bomb.offsetWidth;
 
-    try {
-      if (CONFIG.githubToken) {
-        await createGitHubIssue(payload);
-        try { await appendToJsonFile(payload); } catch { /* issue is enough */ }
-        setStatus(`Thanks ${payload.name}! Your interest is logged. See you at Posh Fair 2026.`, 'success');
-        preorderForm.reset();
-        flavourSelect.value = payload.flavour;
-        await refreshCounts();
-      } else {
-        window.open(buildIssueUrl(payload), '_blank', 'noopener,noreferrer');
-        setStatus('GitHub issue opened in a new tab — click Submit there to log your interest. Ask the site owner to add a token for one-click logging.', 'success');
-      }
-    } catch (error) {
-      setStatus(error.message || 'Something went wrong. Try the GitHub link fallback.', 'error');
-      window.open(buildIssueUrl(payload), '_blank', 'noopener,noreferrer');
-    } finally {
-      submitBtn.disabled = false;
-    }
+    buildOrbitIngredients(flavour.ingredients);
+    stage.classList.add('is-shaking');
+
+    crackPhaseTimer = window.setTimeout(() => {
+      bomb.classList.add('is-cracking');
+    }, 280);
+
+    crackTimer = window.setTimeout(() => {
+      stage.classList.remove('is-shaking');
+      bomb.classList.remove('is-cracking');
+      bomb.classList.add('is-cracked');
+      stage.classList.add('is-bursting');
+      spawnBurst(flavour);
+      if (revealLabel) revealLabel.textContent = flavour.name;
+    }, 420);
+
+    resetTimer = window.setTimeout(() => {
+      resetCrack();
+      buildOrbitIngredients(flavour.ingredients);
+    }, 2800);
+  }
+
+  bomb.addEventListener('click', crack);
+  crackCta.addEventListener('click', crack);
+  flavourButtons.forEach((button) => {
+    button.addEventListener('click', () => chooseFlavour(button.dataset.flavour, true));
   });
 
-  flavourSelect?.addEventListener('change', () => {
-    const item = MENU.find((entry) => entry.id === flavourSelect.value);
-    if (item) root.style.setProperty('--fb-center', item.color);
+  stage.addEventListener('pointermove', (event) => {
+    const rect = stage.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    stage.style.setProperty('--mx', `${x * 16}px`);
+    stage.style.setProperty('--my', `${y * 16}px`);
+    bomb.style.setProperty('--px', `${x * 8}px`);
+    bomb.style.setProperty('--py', `${y * 8}px`);
+    bomb.style.setProperty('--rx', `${y * -7}deg`);
+    bomb.style.setProperty('--ry', `${x * 7}deg`);
+  });
+
+  stage.addEventListener('pointerleave', () => {
+    ['--mx', '--my', '--px', '--py', '--rx', '--ry'].forEach((prop) => {
+      stage.style.removeProperty(prop);
+      bomb.style.removeProperty(prop);
+    });
   });
 
   document.addEventListener('pointermove', (event) => {
@@ -1511,13 +1677,35 @@ textarea.form-control {
 
   root.querySelectorAll('.fb-reveal, .fb-formula').forEach((el) => observer.observe(el));
 
-  if (viewOrdersLink) {
-    viewOrdersLink.href = `https://github.com/${CONFIG.githubOwner}/${CONFIG.githubRepo}/issues?q=label%3Apre-order`;
+  const voteButtons = Array.from(root.querySelectorAll('[data-vote]'));
+  let selectedVote = localStorage.getItem('fbVote');
+  const baseVotes = { orange: 22, 'mixed-nuts': 18, pineapple: 16 };
+
+  function renderVotes() {
+    const votes = { ...baseVotes };
+    if (selectedVote && votes[selectedVote] !== undefined) votes[selectedVote] += 1;
+    const total = Object.values(votes).reduce((sum, v) => sum + v, 0);
+    voteButtons.forEach((button) => {
+      const key = button.dataset.vote;
+      const percent = Math.round((votes[key] / total) * 100);
+      button.setAttribute('aria-pressed', String(key === selectedVote));
+      button.querySelector('.fb-vote-result span').style.width = `${percent}%`;
+      button.querySelector('[data-percent]').textContent = `${percent}%`;
+    });
   }
 
-  flavourSelect.value = 'orange';
-  root.style.setProperty('--fb-center', MENU[0].color);
-  refreshCounts();
+  voteButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      selectedVote = button.dataset.vote;
+      localStorage.setItem('fbVote', selectedVote);
+      renderVotes();
+      const label = flavours[selectedVote]?.name ?? selectedVote;
+      root.querySelector('#fb-vote-status').textContent = `You're most curious about ${label}. See you at the stall on fair day — this isn't an order.`;
+    });
+  });
+
+  renderVotes();
+  chooseFlavour(active, false);
 })();
 </script>
 </body>
