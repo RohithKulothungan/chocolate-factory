@@ -61,6 +61,8 @@
   --fb-chocolate: #3d2314;
   --fb-milk: #8b5a3c;
   --fb-dark: #1f1209;
+  --fb-heart-path: path("M50 92 C50 92 8 68 8 42 C8 24 20 14 32 20 C38 10 62 10 68 20 C80 14 92 24 92 42 C92 68 50 92 50 92 Z");
+  --fb-heart-aspect: 1 / 0.92;
   --cursor-x: 50%;
   --cursor-y: 50%;
 }
@@ -393,10 +395,10 @@ h3 {
 
 .fb-halo {
   position: absolute;
-  width: 88%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--fb-center, var(--primary)), transparent 74%), transparent 66%);
+  width: 78%;
+  aspect-ratio: var(--fb-heart-aspect);
+  clip-path: var(--fb-heart-path);
+  background: radial-gradient(ellipse at 50% 38%, color-mix(in srgb, var(--fb-center, var(--primary)), transparent 74%), transparent 66%);
   transform: translate3d(var(--mx, 0), var(--my, 0), 0);
   transition: transform 0.28s ease, background 0.5s ease;
   animation: fb-halo 3s ease-in-out infinite;
@@ -404,7 +406,7 @@ h3 {
 
 .fb-orbit {
   position: absolute;
-  width: 88%;
+  width: 92%;
   aspect-ratio: 1;
   border: 1px dashed color-mix(in srgb, var(--border), transparent 20%);
   border-radius: 50%;
@@ -432,8 +434,8 @@ h3 {
   appearance: none;
   position: relative;
   z-index: 3;
-  width: min(68vw, 18rem);
-  aspect-ratio: 1;
+  width: min(62vw, 16rem);
+  aspect-ratio: var(--fb-heart-aspect);
   padding: 0;
   border: 0;
   background: transparent;
@@ -450,14 +452,14 @@ h3 {
 .fb-shockwave {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  clip-path: var(--fb-heart-path);
   pointer-events: none;
   opacity: 0;
 }
 
 .fb-crack-flash {
   z-index: 5;
-  background: radial-gradient(circle, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 40%), transparent 68%);
+  background: radial-gradient(ellipse at 50% 38%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 40%), transparent 68%);
 }
 
 .fb-shockwave {
@@ -475,18 +477,19 @@ h3 {
 
 .fb-inner-reveal {
   position: absolute;
-  inset: 22%;
+  inset: 16% 18% 20%;
   z-index: 0;
   display: grid;
   place-items: center;
   pointer-events: none;
+  clip-path: var(--fb-heart-path);
 }
 
 .fb-marshmallow {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 38% 32%, #fff, #f0ebe4 55%, #e8dfd6 100%);
+  clip-path: var(--fb-heart-path);
+  background: radial-gradient(ellipse at 42% 30%, #fff, #f0ebe4 55%, #e8dfd6 100%);
   box-shadow: inset 0 -0.4rem 0.8rem rgba(0 0 0 / 0.06);
   opacity: 0;
   transform: scale(0.3);
@@ -495,13 +498,13 @@ h3 {
 
 .fb-flavor-core {
   position: absolute;
-  width: 52%;
-  aspect-ratio: 1;
-  border-radius: 50%;
+  width: 48%;
+  aspect-ratio: var(--fb-heart-aspect);
+  clip-path: var(--fb-heart-path);
   display: grid;
   place-items: center;
-  font-size: 2rem;
-  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 30%), var(--fb-center, var(--primary)) 72%);
+  font-size: 1.75rem;
+  background: radial-gradient(ellipse at 42% 32%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 30%), var(--fb-center, var(--primary)) 72%);
   box-shadow: 0 0 1.5rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 35%);
   opacity: 0;
   transform: scale(0) rotate(-20deg);
@@ -540,7 +543,7 @@ h3 {
 
 .fb-melt-drip {
   position: absolute;
-  top: 48%;
+  top: 58%;
   width: 0.55rem;
   height: 0;
   border-radius: 0 0 999px 999px;
@@ -553,10 +556,10 @@ h3 {
   animation: fb-drip 0.85s cubic-bezier(0.4, 0, 0.2, 1) var(--drip-delay, 0.1s) both;
 }
 
-.fb-melt-drip:nth-child(1) { left: 38%; --drip-delay: 0.08s; }
-.fb-melt-drip:nth-child(2) { left: 52%; --drip-delay: 0.14s; }
-.fb-melt-drip:nth-child(3) { left: 64%; --drip-delay: 0.2s; }
-.fb-melt-drip:nth-child(4) { left: 44%; --drip-delay: 0.18s; }
+.fb-melt-drip:nth-child(1) { left: 42%; --drip-delay: 0.08s; }
+.fb-melt-drip:nth-child(2) { left: 50%; --drip-delay: 0.14s; }
+.fb-melt-drip:nth-child(3) { left: 56%; --drip-delay: 0.2s; }
+.fb-melt-drip:nth-child(4) { left: 47%; --drip-delay: 0.18s; }
 
 .fb-choc-chip,
 .fb-flavor-pop,
@@ -608,11 +611,11 @@ h3 {
 
 .fb-crack-line {
   position: absolute;
-  top: 12%;
-  left: 48%;
+  top: 16%;
+  left: 49%;
   width: 3px;
-  height: 76%;
-  background: linear-gradient(to bottom, transparent, rgba(255 255 255 / 0.35) 20%, rgba(255 255 255 / 0.5) 50%, rgba(255 255 255 / 0.35) 80%, transparent);
+  height: 78%;
+  background: linear-gradient(to bottom, transparent, rgba(255 255 255 / 0.35) 18%, rgba(255 255 255 / 0.5) 50%, rgba(255 255 255 / 0.35) 82%, transparent);
   border-radius: 999px;
   opacity: 0;
   transform: scaleY(0);
@@ -640,12 +643,12 @@ h3 {
 }
 
 .fb-bomb-button.is-cracked .fb-shell-left {
-  transform: translateX(-38%) translateY(8%) rotate(-22deg);
+  transform: translateX(-34%) translateY(6%) rotate(-18deg);
   filter: drop-shadow(0 2rem 1.6rem rgba(0 0 0 / 0.28));
 }
 
 .fb-bomb-button.is-cracked .fb-shell-right {
-  transform: translateX(38%) translateY(8%) rotate(22deg);
+  transform: translateX(34%) translateY(6%) rotate(18deg);
   filter: drop-shadow(0 2rem 1.6rem rgba(0 0 0 / 0.28));
 }
 
@@ -661,23 +664,34 @@ h3 {
 .fb-shell-half::before {
   content: "";
   position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 24%, #8b5a3c, var(--fb-dark) 68%);
+  inset: 4%;
+  clip-path: var(--fb-heart-path);
+  background: radial-gradient(ellipse at 38% 26%, #8b5a3c, var(--fb-dark) 68%);
   box-shadow:
     inset -1.8rem -2rem 2.8rem rgba(0 0 0 / 0.45),
     inset 0.8rem 0.7rem 1.3rem rgba(255 255 255 / 0.08);
 }
 
-.fb-shell-left { clip-path: polygon(0 0, 53% 0, 47% 18%, 57% 34%, 45% 51%, 54% 69%, 43% 100%, 0 100%); }
-.fb-shell-right { clip-path: polygon(53% 0, 100% 0, 100% 100%, 43% 100%, 54% 69%, 45% 51%, 57% 34%, 47% 18%); }
+.fb-shell-left {
+  clip-path: polygon(
+    0% 0%, 47% 0%, 45% 10%, 51% 20%, 46% 32%, 52% 44%,
+    47% 56%, 53% 68%, 48% 80%, 50% 100%, 0% 100%
+  );
+}
+
+.fb-shell-right {
+  clip-path: polygon(
+    47% 0%, 100% 0%, 100% 100%, 50% 100%, 48% 80%, 53% 68%,
+    47% 56%, 52% 44%, 46% 32%, 51% 20%, 45% 10%
+  );
+}
 
 .fb-filling {
   position: absolute;
-  inset: 28%;
+  inset: 22% 20% 24%;
   z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 22%), var(--fb-center, var(--primary)) 70%);
+  clip-path: var(--fb-heart-path);
+  background: radial-gradient(ellipse at 42% 32%, color-mix(in srgb, var(--fb-center, var(--primary)), #fff 22%), var(--fb-center, var(--primary)) 70%);
   box-shadow: 0 0 2rem color-mix(in srgb, var(--fb-center, var(--primary)), transparent 40%);
   opacity: 0;
   transform: scale(0.5);
@@ -686,14 +700,14 @@ h3 {
 
 .fb-crack-label {
   position: absolute;
-  inset: 36%;
+  inset: 24% 22% 26%;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  clip-path: var(--fb-heart-path);
   background: color-mix(in srgb, var(--background), transparent 18%);
   border: 1px solid var(--border);
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   letter-spacing: 0.1em;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
@@ -1262,7 +1276,7 @@ h3 {
 @media (max-width: 520px) {
   .fb-nav-links .btn:not(.btn-primary) { display: none; }
   .fb-stage { min-height: 22rem; }
-  .fb-bomb-button { width: 15rem; }
+  .fb-bomb-button { width: 13.5rem; }
   .fb-formula { grid-template-columns: 1fr; }
   .fb-formula-index { display: none; }
 }
@@ -1321,7 +1335,7 @@ h3 {
           <div class="fb-halo" aria-hidden="true"></div>
           <div class="fb-orbit" aria-hidden="true"><span>🍊</span><span>🥜</span><span>🍍</span></div>
           <div class="fb-burst-layer" id="fb-burst-layer" aria-hidden="true"></div>
-          <button class="fb-bomb-button" id="fb-bomb" type="button" aria-label="Crack open the Frost Bomb">
+          <button class="fb-bomb-button" id="fb-bomb" type="button" aria-label="Crack open the heart-shaped Frost Bomb">
             <span class="fb-crack-flash" aria-hidden="true"></span>
             <span class="fb-shockwave" aria-hidden="true"></span>
             <span class="fb-inner-reveal" aria-hidden="true">
