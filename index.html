@@ -991,7 +991,7 @@ h3 {
 /* ── Vote ── */
 .fb-vote-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
 }
@@ -1360,23 +1360,7 @@ h3 {
         <p>A playful preview poll — not a real order or reservation. Results are simulated on your device only.</p>
       </div>
       <div class="card">
-        <div class="fb-vote-grid" role="group" aria-label="Preview poll — pick a flavour you're excited to try on fair day">
-          <button class="btn" type="button" data-vote="orange" aria-pressed="false">
-            🍊 Orange Frost Bomb
-            <div class="fb-vote-result"><span></span></div>
-            <small data-percent>0%</small>
-          </button>
-          <button class="btn" type="button" data-vote="mixed-nuts" aria-pressed="false">
-            🥜 Mixed Nuts Frost Bomb
-            <div class="fb-vote-result"><span></span></div>
-            <small data-percent>0%</small>
-          </button>
-          <button class="btn" type="button" data-vote="pineapple" aria-pressed="false">
-            🍍 Caramelized Pineapple
-            <div class="fb-vote-result"><span></span></div>
-            <small data-percent>0%</small>
-          </button>
-        </div>
+        <div class="fb-vote-grid" id="fb-vote-grid" role="group" aria-label="Preview poll — pick a flavour you're excited to try on fair day"></div>
         <p style="margin-top:1rem;color:var(--muted-foreground)" id="fb-vote-status" aria-live="polite">Tap a flavour you're curious about — this doesn't reserve or order anything.</p>
       </div>
     </section>
@@ -1403,6 +1387,7 @@ h3 {
       ingredients: ['🍡', '🍫', '🍊'],
       color: '#f3883b',
       particle: '🍊',
+      pollLabel: '🍊 Orange Frost Bomb',
       hasMarshmallow: true,
     },
     {
@@ -1413,6 +1398,7 @@ h3 {
       ingredients: ['🍡', '🍫', '🥜'],
       color: '#8b5a3c',
       particle: '🥜',
+      pollLabel: '🥜 Mixed Nuts Frost Bomb',
       hasMarshmallow: true,
     },
     {
@@ -1423,6 +1409,7 @@ h3 {
       ingredients: ['🍫', '🥜'],
       color: '#c9a04a',
       particle: '🥜',
+      pollLabel: '🥜 Peanut Butter Mini',
       hasMarshmallow: false,
     },
     {
@@ -1433,6 +1420,7 @@ h3 {
       ingredients: ['🍡', '🍫', '🥜'],
       color: '#d4a574',
       particle: '🍡',
+      pollLabel: '🍡 Milk Chocolate Mini',
       hasMarshmallow: true,
     },
     {
@@ -1443,6 +1431,7 @@ h3 {
       ingredients: ['🍫', '🫙'],
       color: '#c44a6a',
       particle: '🫙',
+      pollLabel: '🫙 Jam Mini',
       hasMarshmallow: false,
     },
     {
@@ -1453,6 +1442,7 @@ h3 {
       ingredients: ['🍫', '🍍'],
       color: '#5dc977',
       particle: '🍍',
+      pollLabel: '🍍 Caramelized Pineapple',
       hasMarshmallow: false,
     },
   ];
@@ -1677,9 +1667,24 @@ h3 {
 
   root.querySelectorAll('.fb-reveal, .fb-formula').forEach((el) => observer.observe(el));
 
+  const voteGrid = root.querySelector('#fb-vote-grid');
+  MENU.forEach((item) => {
+    const button = document.createElement('button');
+    button.className = 'btn';
+    button.type = 'button';
+    button.dataset.vote = item.id;
+    button.setAttribute('aria-pressed', 'false');
+    button.innerHTML = `
+      ${item.pollLabel}
+      <div class="fb-vote-result"><span></span></div>
+      <small data-percent>0%</small>
+    `;
+    voteGrid.appendChild(button);
+  });
+
   const voteButtons = Array.from(root.querySelectorAll('[data-vote]'));
   let selectedVote = localStorage.getItem('fbVote');
-  const baseVotes = { orange: 22, 'mixed-nuts': 18, pineapple: 16 };
+  const baseVotes = Object.fromEntries(MENU.map((item) => [item.id, 0]));
 
   function renderVotes() {
     const votes = { ...baseVotes };
@@ -1687,7 +1692,7 @@ h3 {
     const total = Object.values(votes).reduce((sum, v) => sum + v, 0);
     voteButtons.forEach((button) => {
       const key = button.dataset.vote;
-      const percent = Math.round((votes[key] / total) * 100);
+      const percent = total > 0 ? Math.round((votes[key] / total) * 100) : 0;
       button.setAttribute('aria-pressed', String(key === selectedVote));
       button.querySelector('.fb-vote-result span').style.width = `${percent}%`;
       button.querySelector('[data-percent]').textContent = `${percent}%`;
