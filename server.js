@@ -22,7 +22,13 @@ const DEFAULT_POLL = {
 };
 
 function normalizePoll(raw) {
-  const counts = { ...DEFAULT_POLL.counts, ...(raw?.counts || {}) };
+  const legacy = raw?.counts || {};
+  const merged = { ...legacy };
+  if (legacy['mixed-nuts']) {
+    merged.pomegranate = (Number(merged.pomegranate) || 0) + Number(legacy['mixed-nuts']);
+    delete merged['mixed-nuts'];
+  }
+  const counts = { ...DEFAULT_POLL.counts, ...merged };
   FLAVOURS.forEach((id) => {
     counts[id] = Math.max(0, Number(counts[id]) || 0);
   });
