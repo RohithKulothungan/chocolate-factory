@@ -1,17 +1,17 @@
 {
   "counts": {
     "orange": 21,
-    "pomegranate": 17,
+    "pomegranate": 7,
     "peanut-butter": 0,
     "milk-mini": 0,
     "jam": 14,
     "pineapple": 16
   },
-  "totalVotes": 68,
-  "updatedAt": "2026-08-12T06:19:00.000Z",
+  "totalVotes": 58,
+  "updatedAt": "2026-08-12T06:20:00.000Z",
   "legacy": {
     "mixed-nuts": {
-      "votes": 17,
+      "votes": 7,
       "migratedTo": "pomegranate"
     }
   }
