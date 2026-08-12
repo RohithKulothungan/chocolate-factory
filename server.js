@@ -13,7 +13,7 @@ const GITHUB_REPO = process.env.GITHUB_REPO || 'chocolate-factory';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 const POLL_PATH = 'data/interest-poll.json';
 
-const FLAVOURS = ['orange', 'mixed-nuts', 'peanut-butter', 'milk-mini', 'jam', 'pineapple'];
+const FLAVOURS = ['orange', 'pomegranate', 'peanut-butter', 'milk-mini', 'jam', 'pineapple'];
 
 const DEFAULT_POLL = {
   counts: Object.fromEntries(FLAVOURS.map((id) => [id, 0])),
