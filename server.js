@@ -33,11 +33,13 @@ function normalizePoll(raw) {
     counts[id] = Math.max(0, Number(counts[id]) || 0);
   });
   const totalVotes = FLAVOURS.reduce((sum, id) => sum + counts[id], 0);
-  return {
+  const poll = {
     counts,
     totalVotes,
     updatedAt: raw?.updatedAt || null,
   };
+  if (raw?.legacy) poll.legacy = raw.legacy;
+  return poll;
 }
 
 function readPollLocal() {
